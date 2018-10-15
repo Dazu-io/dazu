@@ -33,6 +33,11 @@
     "output": {
         "text": "Dinheiro transferido!"
     } 
+},{
+    "condition": "#horario-agencias",
+    "output": {
+        "text": "As agências funcionam da 11h as 16!"
+    } 
 },{ 
     "condition" : "true",
     "output": {
