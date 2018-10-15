@@ -5,6 +5,7 @@ services:
   david:
     build: .
     image: ralphg6/david
+    network_mode: bridge
     ports:
       - 6006:6006
       - 8888:8888
