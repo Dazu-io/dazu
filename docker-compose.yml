@@ -9,11 +9,11 @@ services:
       - 6006:6006
       - 8888:8888
     volumes:
-      - david-input:/notebooks/input
-      - david-output:/notebooks/output
+      - ./notebooks/input:/notebooks/input
+      - ./notebooks/output:/notebooks/output
       - ./notebooks:/notebooks/inbuild
 
-volumes:
-  david-input:
-  david-output:
+# volumes:
+#   david-input:
+#   david-output:
 
