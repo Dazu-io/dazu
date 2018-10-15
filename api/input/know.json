@@ -1,0 +1,28 @@
+{
+    "intents" : {
+        "saudacao" : [
+            "Oi", "Olá"
+        ],
+        "despedida" : [
+            "tchau", "Até mais!", "Adeus"
+        ],
+        "saldo" : [
+            "Qual é meu saldo?", "Quanto tenho na conta?", "Saldo da conta corrente", "Quantas pilas eu tenho?", "Qual é o saldo da minha conta?"
+        ],
+        "extrato" : [
+            "Extrato da conta", "Extrato da conta corrente"
+        ],
+        "recarregar-celular" : [
+            "Quero recarregar meu celular!"
+        ],
+        "pagar-receber" : [
+            "link pra receber"
+        ],
+        "transferir" : [
+            "Transferir dinheiro"
+        ],
+        "horario-agencias": [
+            "Qual é o horário de funcionamento das agências?"
+        ]
+    }
+}

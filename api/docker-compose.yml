@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+
+  david-api:
+    build: .
+    image: ralphg6/david-api
+    network_mode: bridge
+    ports:
+      - 5000:5000
+  wormhole:
+    image: flyio/wormhole:0.5.36
+    network_mode: bridge
+    environment:
+      FLY_TOKEN: c5fbe887c23700033b6b816aec8eb0d622a77df0c9333ba160a8f6577910b79a
+      FLY_LOCAL_ENDPOINT: david-api:5000    
+
