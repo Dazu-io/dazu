@@ -20,6 +20,9 @@
         ],
         "transferir" : [
             "Transferir dinheiro"
+        ],
+        "horario-agencias": [
+            "Qual é o horário de funcionamento das agências?"
         ]
     }
 }
