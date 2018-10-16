@@ -23,6 +23,9 @@
         ],
         "horario-agencias": [
             "Qual é o horário de funcionamento das agências?"
+        ],
+        "irmaos" : [
+            "Você tem irmãos?"
         ]
     }
 }

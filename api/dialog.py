@@ -2,7 +2,9 @@ import json
 
 def fetch_dialog():
     with open('./input/dialog.json') as f:
-        return json.load(f)
+        dialog = json.load(f)
+        f.close()
+        return dialog
 
 def get_dialog_welcome(dialog_nodes):
     return dialog_nodes[0]
