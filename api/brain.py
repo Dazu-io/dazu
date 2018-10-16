@@ -5,12 +5,24 @@ def fetch_model():
         with open('./output/intent_model.json') as f:
             return json.load(f)
 
+def persist_model(model):
+    with open('./output/intent_model.json', 'w') as outfile:
+        json.dump(model, outfile);            
+
 def fetch_know():
     with open('./input/know.json') as f:
         return json.load(f)
+
+def persist_know(data):
+    with open('./input/know.json', 'w') as outfile:
+        json.dump(data, outfile);
         
 def fetch_stopwords():
     return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
+
+# def persist_stopwords(data):
+#     with open('./input/stopwords.json', 'w') as outfile:
+#         json.dump(data, outfile);
 
 class Brain:
 
@@ -46,7 +58,7 @@ class Brain:
 
     def classify(self, input):
         tokens = util.tokenize(input, self.stopwords);
-        print ("tokens", tokens);
+        #print ("tokens", tokens);
         intents = {}
         for intent, samples in self.intent_model.items():
             intents[intent] = 0
