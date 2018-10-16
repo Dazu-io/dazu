@@ -6,6 +6,10 @@ def fetch_dialog():
         f.close()
         return dialog
 
+def persist_dialog(data):
+    with open('./input/dialog.json', 'w') as outfile:
+        json.dump(data, outfile);           
+
 def get_dialog_welcome(dialog_nodes):
     return dialog_nodes[0]
 
