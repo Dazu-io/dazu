@@ -11,7 +11,7 @@
 }, {
     "condition": "#saldo",
     "output": {
-        "text": "Seu saldo é R$ #.###,##!"
+        "text": "Seu saldo é R$ 1.234,56!"
     } 
 },{
     "condition": "#extrato",
@@ -37,6 +37,11 @@
     "condition": "#horario-agencias",
     "output": {
         "text": "As agências funcionam da 11h as 16!"
+    } 
+},{
+    "condition": "#irmaos",
+    "output": {
+        "text": "Sim! Meus irmãos são: Caleb, Josué e Hadassa!"
     } 
 },{ 
     "condition" : "true",

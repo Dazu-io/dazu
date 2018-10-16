@@ -21,6 +21,11 @@ def dialog():
     data = request.get_json()
     return jsonify(assistant.respond(data['input']))    
 
+
+@app.route('/google', methods=['GET'])
+def google_works():
+    return "David's Google Webhook works!!!"
+    
 @app.route('/google', methods=['POST'])
 def google():
     data = request.get_json()
