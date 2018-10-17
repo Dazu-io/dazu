@@ -14,6 +14,6 @@ def tokenize(sentence, stopwords = []):
         try:
             tokens.remove(sw); 
         except ValueError:
-            pass
+            pass        
     
-    return tokens;
+    return filter(lambda t: len(t) > 0, tokens);
