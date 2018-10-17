@@ -1,5 +1,8 @@
 import json
 import util
+from Levenshtein import distance
+
+SIMMILARITY_ERROR_ACCEPTED = 0.3
 
 def fetch_model():
         with open('./output/intent_model.json') as f:
@@ -20,6 +23,13 @@ def persist_know(data):
 def fetch_stopwords():
     return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
 
+def simmilarity(a, b):
+    d = distance(a, b)
+    t = float(len(a) + len(b)) / 2
+    if ( d/t <= SIMMILARITY_ERROR_ACCEPTED):
+        return (t - d) / t
+    return 0
+
 # def persist_stopwords(data):
 #     with open('./input/stopwords.json', 'w') as outfile:
 #         json.dump(data, outfile);
@@ -34,6 +44,7 @@ class Brain:
     def train(self):
 
         know = fetch_know()
+        self.stopwords = fetch_stopwords()
 
         self.intent_model = {}
 
@@ -56,6 +67,8 @@ class Brain:
 
         return self.intent_model; 
 
+    
+
     def classify(self, input):
         tokens = util.tokenize(input, self.stopwords);
         #print ("tokens", tokens);
@@ -66,10 +79,11 @@ class Brain:
                 brutal_score = 0
                 stokens = smeta["tokens"]
                 for t in tokens:
-                    if t in stokens:
-                        brutal_score += stokens[t]
+                    for st, value in stokens.items():
+                        print t, st, simmilarity(t, st), value
+                        brutal_score += simmilarity(t, st) * value
                 score = float(brutal_score) / smeta["total"]
-                #print("brutal_score", s, brutal_score, smeta["total"], intents[intent], score)        
+                print("brutal_score", s, brutal_score, smeta, intents[intent], score)        
                 if intents[intent] < score:
                     intents[intent] = score
                 

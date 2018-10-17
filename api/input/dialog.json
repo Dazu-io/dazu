@@ -1,7 +1,7 @@
 [{
     "condition": "#saudacao",
     "output": {
-        "text": "Olá, eu sou o David!"
+        "text": "Olá, eu sou o David!!!!"
     }
 },{
     "condition": "#despedida",
@@ -36,7 +36,7 @@
 },{
     "condition": "#horario-agencias",
     "output": {
-        "text": "As agências funcionam da 11h as 16!"
+        "text": "As agências funcionam das 11h as 16h!"
     } 
 },{
     "condition": "#irmaos",
