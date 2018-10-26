@@ -1,19 +1,31 @@
 import re
+import unidecode
+import nltk
+
+#nltk.download()
+
+stopwords = nltk.corpus.stopwords.words('portuguese')
+#print "stopwords",stopwords
 
 NON_CONTENT = r"[^\w\d\s]"
-def tokenize(sentence, stopwords = []):
+def tokenize(sentence):
+    #print "sentence",sentence
+    # remove accents
+    sentence = unidecode.unidecode(sentence)
+    #print "sentence1",sentence
     #remove non content
     sentence = re.sub(NON_CONTENT, "", sentence)
+    #print "sentence2",sentence
     #lower
-    sentence = sentence.lower();
-    
+    sentence = sentence.lower()
+    #print "sentence3",sentence
     #split
-    tokens = sentence.split(" ");
-        
-    for sw in stopwords:
-        try:
-            tokens.remove(sw); 
-        except ValueError:
-            pass        
+    tokens = sentence.split(" ")
+
+    tokens = filter(lambda t: t not in stopwords, tokens)         
     
-    return filter(lambda t: len(t) > 0, tokens);
+    tokens = filter(lambda t: len(t) > 0, tokens)
+
+    #print "tokens",tokens
+
+    return tokens

@@ -1,0 +1,38 @@
+.App {
+  
+}
+
+.App-header {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-content {
+  background-color: #afbedb;
+  min-height: calc(90vh - 30px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: #282c34;
+  padding: 15px;
+}
+
+.card {
+  flex: 0 1 calc(20% - 1em);
+  text-align: center;
+	position: relative;
+	margin-bottom: 20px; 
+	padding: 30px; 
+	background: #fefff9;
+	color: #363636; 
+  text-decoration: none;
+  box-shadow: rgba(black, 0.19) 0 0 8px 0;
+}
