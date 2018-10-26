@@ -20,8 +20,8 @@ def persist_know(data):
     with open('./input/know.json', 'w') as outfile:
         json.dump(data, outfile);
         
-def fetch_stopwords():
-    return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
+# def fetch_stopwords():
+#     return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
 
 def simmilarity(a, b):
     d = distance(a, b)
@@ -37,14 +37,14 @@ def simmilarity(a, b):
 class Brain:
 
     def __init__(self):
-        print("brain inited")
+        #print("brain inited")
         self.intent_model = fetch_model()
-        self.stopwords = fetch_stopwords()
+        #self.stopwords = fetch_stopwords()
 
     def train(self):
 
         know = fetch_know()
-        self.stopwords = fetch_stopwords()
+        #self.stopwords = fetch_stopwords()
 
         self.intent_model = {}
 
@@ -55,7 +55,7 @@ class Brain:
                     "total" : 0,
                     "tokens" : {}
                 }
-                for t in util.tokenize(sample, self.stopwords):
+                for t in util.tokenize(sample):
                     self.intent_model[intent][sample]["total"] += 1;
                     if t in self.intent_model[intent][sample]["tokens"]:
                         self.intent_model[intent][sample]["tokens"][t] += 1;
@@ -65,12 +65,10 @@ class Brain:
         with open('./output/intent_model.json', 'w') as outfile:
             json.dump(self.intent_model, outfile);
 
-        return self.intent_model; 
-
-    
+        return self.intent_model;
 
     def classify(self, input):
-        tokens = util.tokenize(input, self.stopwords);
+        tokens = util.tokenize(input);
         #print ("tokens", tokens);
         intents = {}
         for intent, samples in self.intent_model.items():
@@ -80,10 +78,10 @@ class Brain:
                 stokens = smeta["tokens"]
                 for t in tokens:
                     for st, value in stokens.items():
-                        print t, st, simmilarity(t, st), value
+                        #print t, st, simmilarity(t, st), value
                         brutal_score += simmilarity(t, st) * value
                 score = float(brutal_score) / smeta["total"]
-                print("brutal_score", s, brutal_score, smeta, intents[intent], score)        
+                #print("brutal_score", s, brutal_score, smeta, intents[intent], score)        
                 if intents[intent] < score:
                     intents[intent] = score
                 
