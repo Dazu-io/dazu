@@ -4,7 +4,11 @@ import nltk
 
 #nltk.download()
 
-stopwords = nltk.corpus.stopwords.words('portuguese')
+def fetch_stopwords():
+    return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
+
+stopwords = fetch_stopwords()
+#stopwords = nltk.corpus.stopwords.words('portuguese')
 #print "stopwords",stopwords
 
 NON_CONTENT = r"[^\w\d\s]"
