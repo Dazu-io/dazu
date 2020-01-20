@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+
+  david-api:
+    build: ../../
+    image: my-first-bot
+    network_mode: bridge
+    ports:
+      - 5000:5000
+    volumes:
+      - ./input:/app/input
+      - ./output:/app/output  
+  # wormhole:
+  #   image: flyio/wormhole:0.5.36
+  #   network_mode: bridge
+  #   links: 
+  #     - david-api:api
+  #   environment:
+  #     FLY_TOKEN: e624447c6727454bbab13d2960330fb9a2abe14c01547971888b2a00f04a7b56
+  #     FLY_LOCAL_ENDPOINT: api:5000    
+

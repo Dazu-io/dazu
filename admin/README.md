@@ -1,3 +1,6 @@
+**This module was created to serve an admin panel to David but he was frozen, because main module needs improving first.**
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

@@ -1,1 +1,5 @@
 api/output/intent_model.json
+/input/*
+/output/*
+
+!.gitkeep
