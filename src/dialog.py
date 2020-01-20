@@ -1,13 +1,13 @@
 import json
 
 def fetch_dialog():
-    with open('./input/dialog.json') as f:
+    with open('./data/dialog.json') as f:
         dialog = json.load(f)
         f.close()
         return dialog
 
 def persist_dialog(data):
-    with open('./input/dialog.json', 'w') as outfile:
+    with open('./data/dialog.json', 'w') as outfile:
         json.dump(data, outfile);           
 
 def get_dialog_welcome(dialog_nodes):

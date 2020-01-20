@@ -5,7 +5,7 @@ import nltk
 #nltk.download()
 
 def fetch_stopwords():
-    return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
+    return set(line.strip() for line in open('./data/stopwords.txt', 'r')) 
 
 stopwords = fetch_stopwords()
 #stopwords = nltk.corpus.stopwords.words('portuguese')
