@@ -9,8 +9,8 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - ./input:/app/input
-      - ./output:/app/output  
+      - ./data:/app/data
+      - ./models:/app/models  
   # wormhole:
   #   image: flyio/wormhole:0.5.36
   #   network_mode: bridge

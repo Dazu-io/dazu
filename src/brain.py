@@ -3,25 +3,27 @@ import util
 from Levenshtein import distance
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
+INTENT_MODEL_FILE = './models/intent_model.json'
+KNOW_FILE = './data/know.json'
 
 def fetch_model():
-        with open('./output/intent_model.json') as f:
+        with open(INTENT_MODEL_FILE) as f:
             return json.load(f)
 
 def persist_model(model):
-    with open('./output/intent_model.json', 'w') as outfile:
+    with open(INTENT_MODEL_FILE, 'w') as outfile:
         json.dump(model, outfile);            
 
 def fetch_know():
-    with open('./input/know.json') as f:
+    with open(KNOW_FILE) as f:
         return json.load(f)
 
 def persist_know(data):
-    with open('./input/know.json', 'w') as outfile:
+    with open(KNOW_FILE, 'w') as outfile:
         json.dump(data, outfile);
         
 # def fetch_stopwords():
-#     return set(line.strip() for line in open('./input/stopwords.txt', 'r'))
+#     return set(line.strip() for line in open('./data/stopwords.txt', 'r'))
 
 def simmilarity(a, b):
     d = distance(a, b)
@@ -31,7 +33,7 @@ def simmilarity(a, b):
     return 0
 
 # def persist_stopwords(data):
-#     with open('./input/stopwords.json', 'w') as outfile:
+#     with open('./data/stopwords.json', 'w') as outfile:
 #         json.dump(data, outfile);
 
 class Brain:
@@ -62,7 +64,7 @@ class Brain:
                     else:
                         self.intent_model[intent][sample]["tokens"][t] = 1;
 
-        with open('./output/intent_model.json', 'w') as outfile:
+        with open('./models/intent_model.json', 'w') as outfile:
             json.dump(self.intent_model, outfile);
 
         return self.intent_model;
