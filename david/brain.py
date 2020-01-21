@@ -1,5 +1,6 @@
 import json
 import util
+import os
 from Levenshtein import distance
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
@@ -7,12 +8,20 @@ INTENT_MODEL_FILE = './models/intent_model.json'
 KNOW_FILE = './data/know.json'
 
 def fetch_model():
+    try:
         with open(INTENT_MODEL_FILE) as f:
             return json.load(f)
+    except:
+        return         
 
 def persist_model(model):
+
+    model_folder = os.path.dirname(INTENT_MODEL_FILE)
+    if not os.path.exists(model_folder):
+        os.makedirs(model_folder)
+
     with open(INTENT_MODEL_FILE, 'w') as outfile:
-        json.dump(model, outfile);            
+        json.dump(model, outfile)            
 
 def fetch_know():
     with open(KNOW_FILE) as f:
@@ -20,7 +29,7 @@ def fetch_know():
 
 def persist_know(data):
     with open(KNOW_FILE, 'w') as outfile:
-        json.dump(data, outfile);
+        json.dump(data, outfile)
         
 # def fetch_stopwords():
 #     return set(line.strip() for line in open('./data/stopwords.txt', 'r'))
@@ -34,13 +43,16 @@ def simmilarity(a, b):
 
 # def persist_stopwords(data):
 #     with open('./data/stopwords.json', 'w') as outfile:
-#         json.dump(data, outfile);
+#         json.dump(data, outfile)
 
 class Brain:
 
     def __init__(self):
         #print("brain inited")
         self.intent_model = fetch_model()
+        if self.intent_model is None:
+            self.train()
+        
         #self.stopwords = fetch_stopwords()
 
     def train(self):
@@ -58,20 +70,19 @@ class Brain:
                     "tokens" : {}
                 }
                 for t in util.tokenize(sample):
-                    self.intent_model[intent][sample]["total"] += 1;
+                    self.intent_model[intent][sample]["total"] += 1
                     if t in self.intent_model[intent][sample]["tokens"]:
-                        self.intent_model[intent][sample]["tokens"][t] += 1;
+                        self.intent_model[intent][sample]["tokens"][t] += 1
                     else:
-                        self.intent_model[intent][sample]["tokens"][t] = 1;
+                        self.intent_model[intent][sample]["tokens"][t] = 1
 
-        with open('./models/intent_model.json', 'w') as outfile:
-            json.dump(self.intent_model, outfile);
+        persist_model(self.intent_model)
 
-        return self.intent_model;
+        return self.intent_model
 
     def classify(self, input):
-        tokens = util.tokenize(input);
-        #print ("tokens", tokens);
+        tokens = util.tokenize(input)
+        #print ("tokens", tokens)
         intents = {}
         for intent, samples in self.intent_model.items():
             intents[intent] = 0
@@ -94,7 +105,7 @@ class Brain:
         
         intents = list(filter(lambda i: i["confidence"] > 0, intents))
         
-        return intents[:10]; 
+        return intents[:10]
 
     def nlp(self, input):
-        return [];      
+        return []
