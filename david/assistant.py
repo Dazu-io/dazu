@@ -1,5 +1,5 @@
-from brain import Brain
-from dialog import Dialog
+from david.brain import Brain
+from david.dialog import Dialog
 
 class Assistant:
 

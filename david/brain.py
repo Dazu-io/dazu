@@ -1,7 +1,9 @@
 import json
-import util
+import david.util as util
 import os
 from Levenshtein import distance
+
+#from david.components.nlu.simplenlu import SimpleNLU
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
 INTENT_MODEL_FILE = './models/intent_model.json'
@@ -49,6 +51,8 @@ class Brain:
 
     def __init__(self):
         #print("brain inited")
+        #self.nlu = SimpleNLU()
+
         self.intent_model = fetch_model()
         if self.intent_model is None:
             self.train()

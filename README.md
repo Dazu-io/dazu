@@ -1,5 +1,7 @@
 # David
-An engine for dialogues. She was inspired by Watson Assistant.
+An engine for chatbots. 
+
+Inspired by Watson Assistant and Rasa.
 
 ## How to RUN
 
