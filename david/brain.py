@@ -3,18 +3,22 @@ import david.util as util
 import os
 from Levenshtein import distance
 
-#from david.components.nlu.simplenlu import SimpleNLU
+from david.components.nlu.simplenlu import SimpleNLU
+
+from david.config import DavidConfig
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
 INTENT_MODEL_FILE = './models/intent_model.json'
 KNOW_FILE = './data/know.json'
+
 
 def fetch_model():
     try:
         with open(INTENT_MODEL_FILE) as f:
             return json.load(f)
     except:
-        return         
+        return
+
 
 def persist_model(model):
 
@@ -23,23 +27,26 @@ def persist_model(model):
         os.makedirs(model_folder)
 
     with open(INTENT_MODEL_FILE, 'w') as outfile:
-        json.dump(model, outfile)            
+        json.dump(model, outfile)
+
 
 def fetch_know():
     with open(KNOW_FILE) as f:
         return json.load(f)
 
+
 def persist_know(data):
     with open(KNOW_FILE, 'w') as outfile:
         json.dump(data, outfile)
-        
+
 # def fetch_stopwords():
 #     return set(line.strip() for line in open('./data/stopwords.txt', 'r'))
+
 
 def simmilarity(a, b):
     d = distance(a, b)
     t = float(len(a) + len(b)) / 2
-    if ( d/t <= SIMMILARITY_ERROR_ACCEPTED):
+    if (d / t <= SIMMILARITY_ERROR_ACCEPTED):
         return (t - d) / t
     return 0
 
@@ -47,22 +54,26 @@ def simmilarity(a, b):
 #     with open('./data/stopwords.json', 'w') as outfile:
 #         json.dump(data, outfile)
 
+
 class Brain:
 
     def __init__(self):
-        #print("brain inited")
-        #self.nlu = SimpleNLU()
+        # print("brain inited")
+        # from david.training_data import TrainingData
+        # training_data = TrainingData()
+        # config = DavidConfig()
+        # self.nlu = SimpleNLU()
+        # self.nlu.train(training_data, config)
 
         self.intent_model = fetch_model()
         if self.intent_model is None:
             self.train()
-        
-        #self.stopwords = fetch_stopwords()
+        # self.stopwords = fetch_stopwords()
 
     def train(self):
 
         know = fetch_know()
-        #self.stopwords = fetch_stopwords()
+        # self.stopwords = fetch_stopwords()
 
         self.intent_model = {}
 

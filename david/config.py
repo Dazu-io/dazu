@@ -1,3 +1,4 @@
+from typing import Any, Dict, Optional, Text, List, Tuple
 
 
 ## Config class inspired by RasaHQ/rasa

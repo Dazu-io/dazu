@@ -1,5 +1,7 @@
 from david.config import DavidConfig, override_defaults
-from david.tranning_data import TrainingData
+from david.training_data import TrainingData, Message
+
+from typing import Any, Dict, Hashable, Optional, Text, List, Tuple
 
 ## Component class inspired by RasaHQ/rasa
 
