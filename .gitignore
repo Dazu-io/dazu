@@ -3,3 +3,4 @@ api/output/intent_model.json
 models/*
 
 !.gitkeep
+.vscode/
