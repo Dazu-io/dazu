@@ -5,6 +5,10 @@
 *.eggs
 *.egg-info
 *.log
+*build/
+*dat
+.env
+venv
 
 api/output/intent_model.json
 /data/*
