@@ -1,6 +1,6 @@
 api/output/intent_model.json
 /data/*
-models/*
+**/models/*
 
 !.gitkeep
 .vscode/
