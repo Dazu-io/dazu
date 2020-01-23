@@ -6,9 +6,7 @@ from typing import Dict, Text, Any, Optional
 from Levenshtein import distance
 
 
-from david.constants import (
-    INTENTS_ATTRIBUTE
-)
+from david.constants import INTENTS_ATTRIBUTE
 
 from david.config import DavidConfig
 
@@ -16,16 +14,18 @@ from david.training_data import Message, TrainingData
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
 
+
 def simmilarity(a, b):
     d = distance(a, b)
     t = float(len(a) + len(b)) / 2
-    if (d / t <= SIMMILARITY_ERROR_ACCEPTED):
+    if d / t <= SIMMILARITY_ERROR_ACCEPTED:
         return (t - d) / t
     return 0
 
+
 class SimpleNLU(Component):
     def __init__(self):
-        print('SimpleNLU')
+        print("SimpleNLU")
 
     def __init__(
         self,
@@ -36,7 +36,6 @@ class SimpleNLU(Component):
         super().__init__(component_config)
 
         self.intent_model = intent_model
-
 
     @classmethod
     def load(
@@ -74,10 +73,7 @@ class SimpleNLU(Component):
         for intent, samples in training_data.data["intents"].items():
             self.intent_model[intent] = {}
             for sample in samples:
-                self.intent_model[intent][sample] = {
-                    "total" : 0,
-                    "tokens" : {}
-                }
+                self.intent_model[intent][sample] = {"total": 0, "tokens": {}}
                 for t in util.tokenize(sample):
                     self.intent_model[intent][sample]["total"] += 1
                     if t in self.intent_model[intent][sample]["tokens"]:
@@ -85,22 +81,20 @@ class SimpleNLU(Component):
                     else:
                         self.intent_model[intent][sample]["tokens"][t] = 1
 
-    def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:        
+    def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
         if not os.path.exists(model_dir):
             os.makedirs(model_dir)
 
         model_file = os.path.join(model_dir, file_name)
-        with open(model_file, 'w') as outfile:
+        with open(model_file, "w") as outfile:
             json.dump(self.intent_model, outfile)
 
-    
-
     def process(self, message: Message, **kwargs: Any) -> None:
-        
+
         input = message.text
 
         tokens = util.tokenize(input)
-        #print ("tokens", tokens)
+        # print ("tokens", tokens)
         intents = {}
         for intent, samples in self.intent_model.items():
             intents[intent] = 0
@@ -109,20 +103,18 @@ class SimpleNLU(Component):
                 stokens = smeta["tokens"]
                 for t in tokens:
                     for st, value in stokens.items():
-                        #print t, st, simmilarity(t, st), value
+                        # print t, st, simmilarity(t, st), value
                         brutal_score += simmilarity(t, st) * value
                 score = float(brutal_score) / smeta["total"]
-                #print("brutal_score", s, brutal_score, smeta, intents[intent], score)        
+                # print("brutal_score", s, brutal_score, smeta, intents[intent], score)
                 if intents[intent] < score:
                     intents[intent] = score
-                
-        intents = [{
-            "intent": intent,
-            "confidence": intents[intent]
-        } for intent in sorted(intents, key=intents.__getitem__, reverse = True)]
-        
-        intents = list(filter(lambda i: i["confidence"] > 0, intents))
-        
-        message.set(INTENTS_ATTRIBUTE, intents[:10])
 
-        
+        intents = [
+            {"intent": intent, "confidence": intents[intent]}
+            for intent in sorted(intents, key=intents.__getitem__, reverse=True)
+        ]
+
+        intents = list(filter(lambda i: i["confidence"] > 0, intents))
+
+        message.set(INTENTS_ATTRIBUTE, intents[:10])

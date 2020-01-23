@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional, Text, List, Tuple
 
 ## Config class inspired by RasaHQ/rasa
 
+
 def override_defaults(
     defaults: Optional[Dict[Text, Any]], custom: Optional[Dict[Text, Any]]
 ) -> Dict[Text, Any]:
@@ -14,6 +15,7 @@ def override_defaults(
     if custom:
         cfg.update(custom)
     return cfg
+
 
 class DavidConfig:
     def __init__(self, configuration_values: Optional[Dict[Text, Any]] = None) -> None:

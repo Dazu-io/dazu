@@ -78,7 +78,7 @@ setup(
     keywords="nlp machine-learning machine-learning-library bot bots "
     "botkit rasa conversational-agents conversational-ai chatbot"
     "chatbot-framework bot-framework watson nlu",
-     url="https://github.com/ralphg6/david",
+    url="https://github.com/ralphg6/david",
     download_url="https://github.com/ralphg6/david/archive/{}.tar.gz"
     "".format(__version__),
     project_urls={

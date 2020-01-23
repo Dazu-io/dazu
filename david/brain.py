@@ -10,19 +10,19 @@ from david.config import DavidConfig
 from david.training_data import Message
 
 
-MODEL_DIR = './models/'
-MODEL_FILE = 'intent_model.json'
-KNOW_FILE = './data/know.json'
+MODEL_DIR = "./models/"
+MODEL_FILE = "intent_model.json"
+KNOW_FILE = "./data/know.json"
 
 
 def fetch_know():
     with open(KNOW_FILE) as f:
         return json.load(f)
 
-def persist_know(data):
-    with open(KNOW_FILE, 'w') as outfile:
-        json.dump(data, outfile)
 
+def persist_know(data):
+    with open(KNOW_FILE, "w") as outfile:
+        json.dump(data, outfile)
 
 
 # def persist_stopwords(data):
@@ -31,14 +31,13 @@ def persist_know(data):
 
 
 class Brain:
-
     def __init__(self):
         # print("brain inited")
         self.train()
 
     def train(self) -> None:
         from david.training_data import TrainingData
-        
+
         know = fetch_know()
 
         training_data = TrainingData(know)
@@ -51,7 +50,6 @@ class Brain:
         message = Message.build(text)
         self.nlu.process(message)
         return message
-
 
     def nlp(self, input):
         return []
