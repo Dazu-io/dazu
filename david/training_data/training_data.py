@@ -1,4 +1,3 @@
-
-class TrainingData():
-    def __init__(self):
-        print('train')
+class TrainingData:
+    def __init__(self, data):
+        self.data = data

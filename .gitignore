@@ -5,6 +5,8 @@
 *.eggs
 *.egg-info
 *.log
+*.swp
+*.swo
 *build/
 *dat
 .env

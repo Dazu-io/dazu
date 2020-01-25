@@ -5,6 +5,7 @@ from typing import Any, Dict, Hashable, Optional, Text, List, Tuple
 
 ## Component class inspired by RasaHQ/rasa
 
+
 class ComponentMetaclass(type):
     """Metaclass with `name` class property"""
 
