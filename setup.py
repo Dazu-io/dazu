@@ -14,10 +14,10 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 dev_requires = [
-    "black=19.10b0",
+    "black>=19.10b0",
     "pylint==2.4.4",
     "flake8==3.7.9",
-    "setuptools >= 41.0.0",
+    "setuptools>=41.0.0",
 ]
 
 tests_requires = [
