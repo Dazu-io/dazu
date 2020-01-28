@@ -1,4 +1,4 @@
-.PHONY: clean test lint init check-readme
+.PHONY: clean test lint
 
 JOBS ?= 1
 
@@ -21,12 +21,6 @@ help:
 	@echo "    test"
 	@echo "        Run pytest on tests/."
 	@echo "        Use the JOBS environment variable to configure number of workers (default: 1)."
-	@echo "    check-readme"
-	@echo "        Check if the README can be converted from .md to .rst for PyPI."
-	@echo "    doctest"
-	@echo "        Run all doctests embedded in the documentation."
-	@echo "    livedocs"
-	@echo "        Build the docs locally."
 
 clean:
 	find . -name '*.pyc' -exec rm -f {} +

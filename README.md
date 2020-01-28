@@ -36,7 +36,7 @@ The name was inspired by [David Ausubel](https://novaescola.org.br/conteudo/262/
 
 ## Development Internals
 ### Running and changing the documentation
-To build <!--& edit the docs-->, first install all necessary dependencies:
+To build<!-- & edit the docs-->, first install all necessary dependencies:
 
 ```
 pip3 install -r requirements-dev.txt
