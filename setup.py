@@ -13,6 +13,13 @@ with open("david/version.py") as f:
 with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
+dev_requires = [
+    "black=19.10b0",
+    "pylint==2.4.4",
+    "flake8==3.7.9",
+    "setuptools >= 41.0.0",
+]
+
 tests_requires = [
     "pytest~=4.5",
     # "pytest-cov~=2.7",
@@ -33,13 +40,11 @@ install_requires = [
     "python-Levenshtein==0.12.0",
     "Unidecode==1.0.22",
     "nltk==3.4.5",
-    "pylint==2.4.4",
-    "flake8==3.7.9",
-    "setuptools >= 41.0.0",
 ]
 
 extras_requires = {
     "test": tests_requires,
+    "dev": dev_requires,
     # "spacy": ["spacy>=2.1,<2.2"],
     # "convert": ["tensorflow_text~=1.15.1", "tensorflow_hub~=0.6.0"],
     # "mitie": ["mitie"],
