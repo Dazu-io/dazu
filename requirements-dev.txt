@@ -1,0 +1,9 @@
+# base and pipeline dependencies
+# requirements_full.txt includes requirements.txt, so no need to
+# include it here.
+-r requirements.txt
+
+pylint==2.4.4
+flake8==3.7.9
+setuptools >= 41.0.0
+black>=19.10b0
