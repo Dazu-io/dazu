@@ -9,6 +9,7 @@ from david.components import Component
 from david.config import DavidConfig
 from david.constants import INTENTS_ATTRIBUTE
 from david.typing import Message, TrainingData
+from david.typing.model import Metadata
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
 

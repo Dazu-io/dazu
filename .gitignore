@@ -12,6 +12,8 @@
 .env
 venv
 
+.pytype
+
 api/output/intent_model.json
 /data/*
 **/models/*
