@@ -1,9 +1,35 @@
-from typing import Any, Dict, Optional, Text, List, Tuple
+import copy
+import warnings
+from typing import Any, Dict, List, Optional, Text, Tuple
+
+from david.util import json_to_string
 
 
-## Config class inspired by RasaHQ/rasa
+class InvalidConfigError(ValueError):
+    """Raised if an invalid configuration is encountered."""
+
+    def __init__(self, message: Text) -> None:
+        super().__init__(message)
 
 
+def component_config_from_pipeline(
+    index: int,
+    pipeline: List[Dict[Text, Any]],
+    defaults: Optional[Dict[Text, Any]] = None,
+) -> Dict[Text, Any]:
+    try:
+        c = pipeline[index]
+        return override_defaults(defaults, c)
+    except IndexError:
+        warnings.warn(
+            f"Tried to get configuration value for component "
+            f"number {index} which is not part of the pipeline. "
+            f"Returning `defaults`."
+        )
+        return override_defaults(defaults, {})
+
+
+# Config class inspired by RasaHQ/rasa
 def override_defaults(
     defaults: Optional[Dict[Text, Any]], custom: Optional[Dict[Text, Any]]
 ) -> Dict[Text, Any]:

@@ -1,7 +1,6 @@
 from david.brain import Brain
+from david.constants import CONTEXT_ATTRIBUTE, ENTITIES_ATTRIBUTE, INTENTS_ATTRIBUTE
 from david.dialog import Dialog
-
-from david.constants import INTENTS_ATTRIBUTE, ENTITIES_ATTRIBUTE, CONTEXT_ATTRIBUTE
 
 
 class Assistant:

@@ -1,11 +1,33 @@
+import logging
+from typing import Any, Dict, Hashable, List, Optional, Text, Tuple
+
 from david.config import DavidConfig, override_defaults
-from david.training_data import TrainingData, Message
+from david.typing import Message, TrainingData
+from david.typing.model import Metadata
 
-from typing import Any, Dict, Hashable, Optional, Text, List, Tuple
-
-## Component class inspired by RasaHQ/rasa
+logger = logging.getLogger(__name__)
 
 
+class UnsupportedLanguageError(Exception):
+    """Raised when a component is created but the language is not supported.
+    Attributes:
+        component -- component name
+        language -- language that component doesn't support
+    """
+
+    def __init__(self, component: Text, language: Text) -> None:
+        self.component = component
+        self.language = language
+
+        super().__init__(component, language)
+
+    def __str__(self) -> Text:
+        return (
+            f"component '{self.component}' does not support language '{self.language}'."
+        )
+
+
+# Component class inspired by RasaHQ/rasa
 class ComponentMetaclass(type):
     """Metaclass with `name` class property"""
 

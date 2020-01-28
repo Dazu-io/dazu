@@ -1,8 +1,9 @@
+import json
 import re
-import unidecode
-import nltk
+from typing import Any, Dict, List, Optional, Text, Tuple
 
-# nltk.download()
+import nltk
+import unidecode
 
 
 def fetch_stopwords():
@@ -37,3 +38,9 @@ def tokenize(sentence):
     # print "tokens",tokens
 
     return tokens
+
+
+def json_to_string(obj: Any, **kwargs: Any) -> Text:
+    indent = kwargs.pop("indent", 2)
+    ensure_ascii = kwargs.pop("ensure_ascii", False)
+    return json.dumps(obj, indent=indent, ensure_ascii=ensure_ascii, **kwargs)

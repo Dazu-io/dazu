@@ -1,14 +1,10 @@
 import json
-import david.util as util
 import os
 
-
+import david.util as util
 from david.components.nlu.simplenlu import SimpleNLU
-
 from david.config import DavidConfig
-
-from david.training_data import Message
-
+from david.typing import Message, TrainingData
 
 MODEL_DIR = "./models/"
 MODEL_FILE = "intent_model.json"
@@ -36,7 +32,6 @@ class Brain:
         self.train()
 
     def train(self) -> None:
-        from david.training_data import TrainingData
 
         know = fetch_know()
 

@@ -1,16 +1,14 @@
-from david.components import Component
-import os
 import json
-import david.util as util
-from typing import Dict, Text, Any, Optional
+import os
+from typing import Any, Dict, Optional, Text
+
 from Levenshtein import distance
 
-
-from david.constants import INTENTS_ATTRIBUTE
-
+import david.util as util
+from david.components import Component
 from david.config import DavidConfig
-
-from david.training_data import Message, TrainingData
+from david.constants import INTENTS_ATTRIBUTE
+from david.typing import Message, TrainingData
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
 
@@ -55,6 +53,7 @@ class SimpleNLU(Component):
         calls to components previous
         to this one."""
 
+        file_name = meta.get("file")
         model_file = os.path.join(model_dir, file_name)
 
         if os.path.exists(model_file):
