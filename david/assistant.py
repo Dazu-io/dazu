@@ -22,9 +22,14 @@ class Assistant:
 
         # print("intents", intents)
         dialog_node = self.dialog.dialog(input, context, intents, entities)
-        return {
-            "context": context,
-            "intents": intents,
-            "entities": entities,
-            "output": dialog_node["output"],
-        }
+
+        message.output = dialog_node["output"]
+
+        # return {
+        #     "context": context,
+        #     "intents": intents,
+        #     "entities": entities,
+        #     "output": dialog_node["output"],
+        # }
+
+        return message
