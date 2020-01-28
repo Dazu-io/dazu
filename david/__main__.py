@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+
 from david.assistant import Assistant
-from david.googleadap import GoogleWebHook
 from david.dialog import fetch_dialog
+from david.googleadap import GoogleWebHook
 
 # from david.brain import fetch_model, fetch_know
 

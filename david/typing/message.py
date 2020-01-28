@@ -1,10 +1,10 @@
-from typing import Dict, Text, Any
+from typing import Any, Dict, Text
 
 from david.constants import (
+    CONTEXT_ATTRIBUTE,
     ENTITIES_ATTRIBUTE,
     INTENTS_ATTRIBUTE,
     TEXT_ATTRIBUTE,
-    CONTEXT_ATTRIBUTE,
 )
 
 
