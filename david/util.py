@@ -31,11 +31,11 @@ def tokenize(sentence):
     # split
     tokens = sentence.split(" ")
 
-    tokens = filter(lambda t: t not in stopwords, tokens)
+    tokens = list(filter(lambda t: t not in stopwords, tokens))
 
-    tokens = filter(lambda t: len(t) > 0, tokens)
+    tokens = list(filter(lambda t: len(t) > 0, tokens))
 
-    # print "tokens",tokens
+    # print("tokens", tokens)
 
     return tokens
 

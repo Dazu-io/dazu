@@ -14,6 +14,7 @@ class Message:
         self.context = context
         self.time = time
         self.data = data
+        self.output = None
 
         # if context is not None:
         # self.set(CONTEXT_ATTRIBUTE, context)

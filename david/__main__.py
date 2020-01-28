@@ -28,7 +28,7 @@ def train():
 @app.route("/dialog", methods=["POST"])
 def dialog():
     data = request.get_json()
-    return jsonify(assistant.respond(data["input"]))
+    return jsonify(assistant.respond(data["input"]).__dict__)
 
 
 @app.route("/google", methods=["POST"])
