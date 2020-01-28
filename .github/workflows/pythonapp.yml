@@ -20,6 +20,9 @@ jobs:
     - name: Lint
       run: |
         make lint
+    - name: Checking types
+      run: |
+        make types    
 #     - name: Test with pytest
 #       run: |
 #         pip install pytest

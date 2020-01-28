@@ -60,41 +60,26 @@ class DavidConfig:
         if self.__dict__["pipeline"] is None:
             # replaces None with empty list
             self.__dict__["pipeline"] = []
-        elif isinstance(self.__dict__["pipeline"], str):
-            from rasa.nlu import registry
+        # elif isinstance(self.__dict__["pipeline"], str):
+        # from rasa.nlu import registry
 
-            template_name = self.__dict__["pipeline"]
-            new_names = {
-                "spacy_sklearn": "pretrained_embeddings_spacy",
-                "tensorflow_embedding": "supervised_embeddings",
-            }
-            if template_name in new_names:
-                warnings.warn(
-                    f"You have specified the pipeline template "
-                    f"'{template_name}' which has been renamed to "
-                    f"'{new_names[template_name]}'. "
-                    f"Please update your code as it will no "
-                    f"longer work with future versions of "
-                    f"Rasa.",
-                    FutureWarning,
-                )
-                template_name = new_names[template_name]
+        # template_name = self.__dict__["pipeline"]
 
-            pipeline = registry.pipeline_template(template_name)
+        # pipeline = registry.pipeline_template(template_name)
 
-            if pipeline:
-                # replaces the template with the actual components
-                self.__dict__["pipeline"] = pipeline
-            else:
-                known_templates = ", ".join(
-                    registry.registered_pipeline_templates.keys()
-                )
+        # if pipeline:
+        #     # replaces the template with the actual components
+        #     self.__dict__["pipeline"] = pipeline
+        # else:
+        #     known_templates = ", ".join(
+        #         registry.registered_pipeline_templates.keys()
+        #     )
 
-                raise InvalidConfigError(
-                    f"No pipeline specified and unknown "
-                    f"pipeline template '{template_name}' passed. Known "
-                    f"pipeline templates: {known_templates}"
-                )
+        #     raise InvalidConfigError(
+        #         f"No pipeline specified and unknown "
+        #         f"pipeline template '{template_name}' passed. Known "
+        #         f"pipeline templates: {known_templates}"
+        #     )
 
         for key, value in self.items():
             setattr(self, key, value)
