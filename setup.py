@@ -18,6 +18,9 @@ dev_requires = [
     "pylint==2.4.4",
     "flake8==3.7.9",
     "setuptools>=41.0.0",
+    "Sphinx==2.3.1",
+    "sphinx-rtd-theme==0.4.3",
+    "bluepy==1.3.0",
 ]
 
 tests_requires = [
