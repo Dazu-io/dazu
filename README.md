@@ -3,7 +3,7 @@
 [![Documentation Status](https://readthedocs.org/projects/david-ausubel/badge/?version=latest)](https://david-ausubel.readthedocs.io/en/latest/?badge=latest)
 
 
-**David** is a powerfull engine dialogue engine with two main parts: `NLU` and `engine`. The main objetive of this project is too use existing chatbots projects and uses it to develop your solution.
+**David** is a powerfull engine dialogue engine with two main parts: `NLU` and `dialogue`. The main objetive of this project is too use existing chatbots projects and uses it to develop your solution.
 
 The name was inspired by [David Ausubel](https://novaescola.org.br/conteudo/262/david-ausubel-e-a-aprendizagem-significativa) because the main objective of this project was to build a collaborative platform to maintain Bots for learning.
 
@@ -22,7 +22,7 @@ docker-compose up --build
 * Editable mode:
 
 ```bash
-pip install -r requirements.txt
+pip install -e .
 cd examples/my-first-bot
 david
 ```
@@ -105,7 +105,7 @@ make types
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -113,13 +113,13 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Rafael Pinto** - *Creator* - [ralphg6](https://github.com/ralphg6)
+* **Raphael Pinto** - *Creator* - [ralphg6](https://github.com/ralphg6)
 
 See also the list of [contributors](https://github.com/ralphg6/david/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache-2.0 - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
