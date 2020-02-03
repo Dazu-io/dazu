@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+from david.adapters.adapter import AdaptEngine
 from david.assistant import Assistant
 from david.dialog import fetch_dialog
 from david.googleadap import GoogleWebHook
@@ -12,6 +13,8 @@ CORS(app)
 
 assistant = Assistant()
 googleWH = GoogleWebHook(assistant)
+
+adapt_engine = AdaptEngine()
 
 
 @app.route("/")
@@ -27,8 +30,11 @@ def train():
 
 @app.route("/dialog", methods=["POST"])
 def dialog():
-    data = request.get_json()
-    return jsonify(assistant.respond(data["input"]).__dict__)
+    requestData = request.get_json()
+    messageIn = adapt_engine.input(requestData)
+    messageOut = assistant.respond(messageIn)
+    responseData = adapt_engine.output(messageOut)
+    return jsonify(responseData)
 
 
 @app.route("/google", methods=["POST"])

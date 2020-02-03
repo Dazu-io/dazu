@@ -7,7 +7,7 @@ from Levenshtein import distance
 import david.util as util
 from david.components import Component
 from david.config import DavidConfig
-from david.constants import INTENTS_ATTRIBUTE
+from david.constants import INTENTS_ATTRIBUTE, TEXT_ATTRIBUTE
 from david.typing import Message, TrainingData
 from david.typing.model import Metadata
 
@@ -91,7 +91,7 @@ class SimpleNLU(Component):
 
     def process(self, message: Message, **kwargs: Any) -> None:
 
-        input = message.text
+        input = message.get(TEXT_ATTRIBUTE)
 
         tokens = util.tokenize(input)
         # print ("tokens", tokens)

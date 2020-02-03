@@ -1,5 +1,10 @@
 from david.brain import Brain
-from david.constants import CONTEXT_ATTRIBUTE, ENTITIES_ATTRIBUTE, INTENTS_ATTRIBUTE
+from david.constants import (
+    CONTEXT_ATTRIBUTE,
+    ENTITIES_ATTRIBUTE,
+    INTENTS_ATTRIBUTE,
+    TEXT_ATTRIBUTE,
+)
 from david.dialog import Dialog
 
 
@@ -13,8 +18,10 @@ class Assistant:
         self.brain.train()
         self.dialog.train()
 
-    def respond(self, input, context={}):
-        message = self.brain.process(input)
+    def respond(self, message, context={}):
+        text = message.get(TEXT_ATTRIBUTE)
+
+        message = self.brain.process(text)
 
         intents = message.get(INTENTS_ATTRIBUTE)
         entities = message.get(ENTITIES_ATTRIBUTE)
