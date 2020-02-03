@@ -15,6 +15,12 @@ class InvalidInputError(Exception):
 
 
 class Adapter:
+    @property
+    def name(self):
+        """The name property is a function of the class - its __name__."""
+
+        return self.__class__.__name__
+
     def validade_data(self, payload: Dict) -> bool:
         raise NotImplementedError
 
@@ -27,7 +33,7 @@ class Adapter:
 
 class MessageAdapter(Adapter):
     def validade_data(self, payload: Dict) -> bool:
-        return True
+        return "input" in payload and "text" in payload["input"]
 
     def input(self, payload: Dict) -> Message:
         return Message.build(payload=payload)
@@ -40,16 +46,10 @@ class AdaptEngine:
     def __init__(self, adapter: Adapter = MessageAdapter()):
         self.adapter = adapter
 
-    @property
-    def name(cls):
-        """The name property is a function of the class - its __name__."""
-
-        return cls.__name__
-
     def input(self, payload: Dict) -> Message:
 
         if not self.adapter.validade_data(payload):
-            raise InvalidInputError(type(self).name)
+            raise InvalidInputError(self.adapter.name)
 
         return self.adapter.input(payload)
 
