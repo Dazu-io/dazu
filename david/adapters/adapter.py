@@ -4,16 +4,6 @@ from typing import Dict, List, Text
 from david.typing import Message
 
 
-class InvalidInputError(Exception):
-    def __init__(self, adapter: Text) -> None:
-        self.adapter = adapter
-
-        super().__init__(adapter)
-
-    def __str__(self) -> Text:
-        return f"Adapter '{self.adapter}' does not support this input."
-
-
 class Adapter:
     @property
     def name(self):
@@ -32,6 +22,10 @@ class Adapter:
 
 
 class MessageAdapter(Adapter):
+    @property
+    def name(self):
+        return "message"
+
     def validade_data(self, payload: Dict) -> bool:
         return "input" in payload and "text" in payload["input"]
 
@@ -42,16 +36,26 @@ class MessageAdapter(Adapter):
         return message.__dict__
 
 
+# [TODO] create a component registry and migrate this code
 class AdaptEngine:
-    def __init__(self, adapter: Adapter = MessageAdapter()):
-        self.adapter = adapter
+    adapters = {}
 
-    def input(self, payload: Dict) -> Message:
+    def __init__(self, defaultAdapter=None):
 
-        if not self.adapter.validade_data(payload):
-            raise InvalidInputError(self.adapter.name)
+        messageAdapter = MessageAdapter()
+        self.registryAdapter(messageAdapter)
 
-        return self.adapter.input(payload)
+        if defaultAdapter:
+            self.defaultAdapter = defaultAdapter
+        else:
+            self.defaultAdapter = messageAdapter.name
 
-    def output(self, message: Message) -> Dict:
-        return self.adapter.output(message)
+    def registryAdapter(self, adapter: Adapter):
+        self.adapters[adapter.name] = adapter
+
+    def getAdapter(self, adapterName=None):
+
+        if not adapterName:
+            adapterName = self.defaultAdapter
+
+        return self.adapters[adapterName]

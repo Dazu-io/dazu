@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, make_response, request
 from flask_cors import CORS
 
 from david.adapters.adapter import AdaptEngine
@@ -31,9 +31,17 @@ def train():
 @app.route("/dialog", methods=["POST"])
 def dialog():
     requestData = request.get_json()
-    messageIn = adapt_engine.input(requestData)
+
+    # [TODO] receive adapter from query string
+    adapter = adapt_engine.getAdapter()
+
+    if not adapter.validade_data(requestData):
+        # [TODO] send status code 400
+        return jsonify(error="invalid input")
+
+    messageIn = adapter.input(requestData)
     messageOut = assistant.respond(messageIn)
-    responseData = adapt_engine.output(messageOut)
+    responseData = adapter.output(messageOut)
     return jsonify(responseData)
 
 
