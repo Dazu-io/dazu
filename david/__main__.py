@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, abort, jsonify, make_response, request
 from flask_cors import CORS
 
 from david.assistant import Assistant
 from david.dialog import fetch_dialog
 from david.googleadap import GoogleWebHook
+from david.registry import Registry
 
 # from david.brain import fetch_model, fetch_know
 
@@ -12,6 +13,8 @@ CORS(app)
 
 assistant = Assistant()
 googleWH = GoogleWebHook(assistant)
+
+registry = Registry.get_instance()
 
 
 @app.route("/")
@@ -27,8 +30,21 @@ def train():
 
 @app.route("/dialog", methods=["POST"])
 def dialog():
-    data = request.get_json()
-    return jsonify(assistant.respond(data["input"]).__dict__)
+    requestData = request.get_json()
+
+    adapterName = request.args.get("adapter")
+    adapter = registry.getAdapter(adapterName)
+
+    if not adapter:
+        abort(400, "Invalid adapter")
+
+    if not adapter.validade_data(requestData):
+        abort(400, "Invalid input")
+
+    messageIn = adapter.input(requestData)
+    messageOut = assistant.respond(messageIn)
+    responseData = adapter.output(messageOut)
+    return jsonify(responseData)
 
 
 @app.route("/google", methods=["POST"])

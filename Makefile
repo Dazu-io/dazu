@@ -32,6 +32,7 @@ clean:
 	rm -rf docs/_build
 
 formatter:
+	isort -rc -q david tests
 	black david tests
 
 lint:

@@ -10,7 +10,8 @@ from david.constants import (
 
 class Message:
     def __init__(self, text: Text, context=None, data={}, time=None):
-        self.text = text
+        self.input = {}
+        self.input["text"] = text
         self.context = context
         self.time = time
         self.data = data
@@ -26,19 +27,28 @@ class Message:
 
     def get(self, prop, default=None) -> Any:
         if prop == TEXT_ATTRIBUTE:
-            return self.text
+            return self.input["text"]
         return self.data.get(prop, default)
 
     @classmethod
-    def build(cls, text, intents=None, entities=None, context=None) -> "Message":
+    def build(
+        cls, text=None, intents=None, entities=None, context=None, payload=None
+    ) -> "Message":
         data = {}
+
         if intents:
             # split_intent, response_key = cls.separate_intent_response_key(intent)
             data[INTENTS_ATTRIBUTE] = intents
             # if response_key:
             # data[RESPONSE_KEY_ATTRIBUTE] = response_key
+
         if entities:
             data[ENTITIES_ATTRIBUTE] = entities
+
         if context:
             data[CONTEXT_ATTRIBUTE] = context
+
+        if not text:
+            text = payload["input"]["text"]
+
         return cls(text, data)
