@@ -32,4 +32,7 @@ class Registry:
         if not adapterName:
             adapterName = self.defaultAdapter
 
-        return self.adapters[adapterName]
+        if adapterName in self.adapters:
+            return self.adapters[adapterName]
+
+        return

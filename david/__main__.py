@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, abort, jsonify, make_response, request
 from flask_cors import CORS
 
 from david.assistant import Assistant
@@ -32,12 +32,14 @@ def train():
 def dialog():
     requestData = request.get_json()
 
-    # [TODO] receive adapter from query string
-    adapter = registry.getAdapter()
+    adapterName = request.args.get("adapter")
+    adapter = registry.getAdapter(adapterName)
+
+    if not adapter:
+        abort(400, "Invalid adapter")
 
     if not adapter.validade_data(requestData):
-        # [TODO] send status code 400
-        return jsonify(error="invalid input")
+        abort(400, "Invalid input")
 
     messageIn = adapter.input(requestData)
     messageOut = assistant.respond(messageIn)
