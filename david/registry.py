@@ -1,5 +1,6 @@
 from david.adapters.adapter import Adapter, MessageAdapter
 
+
 # [TODO] refactory as generic registry
 class Registry:
 
