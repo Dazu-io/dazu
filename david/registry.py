@@ -1,8 +1,7 @@
 from abc import ABCMeta
+from typing import Type
 
 from david.config import DavidConfig
-
-from typing import Type
 
 
 class Module(type, metaclass=ABCMeta):
