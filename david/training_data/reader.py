@@ -2,11 +2,11 @@ from abc import ABCMeta, abstractmethod
 from typing import Dict
 
 from david.config import DavidConfig
+from david.registry import Module
 from david.typing import TrainingData
 
 
-class Reader(metaclass=ABCMeta):
-
+class Reader(metaclass=Module):
     @classmethod
     @abstractmethod
     def load(cls, config: DavidConfig) -> TrainingData:
