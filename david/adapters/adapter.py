@@ -1,36 +1,40 @@
 import json
+from abc import abstractmethod
 from typing import Dict, List, Text
 
+from david.registry import Module
 from david.typing import Message
 
 
-class Adapter:
-    @property
-    def name(self):
-        """The name property is a function of the class - its __name__."""
-
-        return self.__class__.__name__
-
+class Adapter(Module):
+    @classmethod
     def validade_data(self, payload: Dict) -> bool:
-        raise NotImplementedError
+        return True
 
-    def input(self, payload: Dict) -> Message:
-        raise NotImplementedError
+    @classmethod
+    @abstractmethod
+    def input(cls, payload: Dict) -> Message:
+        pass
 
-    def output(self, message: Message) -> Dict:
-        raise NotImplementedError
+    @classmethod
+    @abstractmethod
+    def output(cls, message: Message) -> Dict:
+        pass
 
 
 class MessageAdapter(Adapter):
-    @property
-    def name(self):
+    @classmethod
+    def name(cls):
         return "message"
 
-    def validade_data(self, payload: Dict) -> bool:
+    @classmethod
+    def validade_data(cls, payload: Dict) -> bool:
         return "input" in payload and "text" in payload["input"]
 
-    def input(self, payload: Dict) -> Message:
+    @classmethod
+    def input(cls, payload: Dict) -> Message:
         return Message.build(payload=payload)
 
-    def output(self, message: Message) -> Dict:
+    @classmethod
+    def output(cls, message: Message) -> Dict:
         return message.__dict__
