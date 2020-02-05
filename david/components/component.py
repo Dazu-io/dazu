@@ -2,6 +2,7 @@ import logging
 from typing import Any, Dict, Hashable, List, Optional, Text, Tuple
 
 from david.config import DavidConfig, override_defaults
+from david.registry import Module
 from david.typing import Message, TrainingData
 from david.typing.model import Metadata
 
@@ -28,17 +29,7 @@ class UnsupportedLanguageError(Exception):
 
 
 # Component class inspired by RasaHQ/rasa
-class ComponentMetaclass(type):
-    """Metaclass with `name` class property"""
-
-    @property
-    def name(cls):
-        """The name property is a function of the class - its __name__."""
-
-        return cls.__name__
-
-
-class Component(metaclass=ComponentMetaclass):
+class Component(metaclass=Module):
     """A component is a message processing unit in a pipeline.
     Components are collected sequentially in a pipeline. Each component
     is called one after another. This holds for

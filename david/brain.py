@@ -16,17 +16,14 @@ MODEL_FILE = "intent_model.json"
 
 
 class Brain:
-    def __init__(self):
-        # print("brain inited")
+    def __init__(self, config: DavidConfig):
+        self.config = config
         self.train()
 
     def train(self) -> None:
-
-        config = DavidConfig()
-
-        training_data = JsonReader.load(config)
-        self.nlu = SimpleNLU.create({}, config)
-        self.nlu.train(training_data, config)
+        training_data = JsonReader.load(self.config)
+        self.nlu = SimpleNLU.create({}, self.config)
+        self.nlu.train(training_data, self.config)
         self.nlu.persist(file_name=MODEL_FILE, model_dir=MODEL_DIR)
 
     def process(self, text) -> Message:

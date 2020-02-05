@@ -1,4 +1,5 @@
 from david.brain import Brain
+from david.config import DavidConfig
 from david.constants import (
     CONTEXT_ATTRIBUTE,
     ENTITIES_ATTRIBUTE,
@@ -9,8 +10,8 @@ from david.dialog import Dialog
 
 
 class Assistant:
-    def __init__(self):
-        self.brain = Brain()
+    def __init__(self, config: DavidConfig):
+        self.brain = Brain(config)
         self.dialog = Dialog()
         self.train()
 

@@ -1,4 +1,17 @@
+from abc import ABCMeta
+
 from david.adapters.adapter import Adapter, MessageAdapter
+from david.config import DavidConfig
+
+
+class Module(type, metaclass=ABCMeta):
+    """Metaclass with `name` class property"""
+
+    @property
+    def name(cls):
+        """The name property is a function of the class - its __name__."""
+
+        return cls.__name__
 
 
 # [TODO] refactory as generic registry
@@ -6,33 +19,29 @@ class Registry:
 
     _instance = None
 
-    adapters = {}
-
-    def __init__(self, defaultAdapter=None):
-
-        messageAdapter = MessageAdapter()
-        self.registryAdapter(messageAdapter)
-
-        if defaultAdapter:
-            self.defaultAdapter = defaultAdapter
-        else:
-            self.defaultAdapter = messageAdapter.name
+    modules = {}
 
     @classmethod
-    def get_instance(cls):
-        if not cls._instance:
-            cls._instance = Registry()
-        return cls._instance
+    def registry(cls, module: Module, prefix: str = ""):
+        cls.modules[prefix + module.name] = module
 
-    def registryAdapter(self, adapter: Adapter):
-        self.adapters[adapter.name] = adapter
+    @classmethod
+    def get(cls, moduleName: str, prefix: str = "", default=None) -> Module:
+        name = prefix + moduleName
 
-    def getAdapter(self, adapterName=None):
+        if name in cls.modules:
+            return cls.modules[name]
+
+        return default
+
+    @classmethod
+    def registryAdapter(cls, adapter: Adapter):
+        cls.registry(adapter, "adapter_")
+
+    @classmethod
+    def getAdapter(cls, config: DavidConfig, adapterName=None):
 
         if not adapterName:
-            adapterName = self.defaultAdapter
+            adapterName = config.get("default_adapter")
 
-        if adapterName in self.adapters:
-            return self.adapters[adapterName]
-
-        return
+        return cls.get(adapterName, "adapter_")
