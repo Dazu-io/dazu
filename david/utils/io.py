@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Text, Type, Union
 
 import ruamel.yaml as yaml
+
 from david.constants import DEFAULT_LOG_LEVEL, ENV_LOG_LEVEL
 
 DEFAULT_ENCODING = "utf-8"
