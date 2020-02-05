@@ -13,14 +13,12 @@ from david.registry import Registry
 app = Flask(__name__)
 CORS(app)
 
-messageAdapter = MessageAdapter()
-
 # [TODO] This kwargs must from CLI args
-kwargs = {"default_adapter": messageAdapter.name}
+kwargs = {"default_adapter": MessageAdapter.name()}
 
 config = david.config.load(None, **kwargs)
 
-Registry.registryAdapter(messageAdapter)
+Registry.registryAdapter(MessageAdapter)
 
 assistant = Assistant(config)
 googleWH = GoogleWebHook(assistant)
