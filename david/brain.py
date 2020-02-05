@@ -4,22 +4,11 @@ import os
 import david.util as util
 from david.components.nlu.simplenlu import SimpleNLU
 from david.config import DavidConfig
+from david.training_data.formats.json import JsonReader
 from david.typing import Message, TrainingData
 
 MODEL_DIR = "./models/"
 MODEL_FILE = "intent_model.json"
-KNOW_FILE = "./data/know.json"
-
-
-def fetch_know():
-    with open(KNOW_FILE) as f:
-        return json.load(f)
-
-
-def persist_know(data):
-    with open(KNOW_FILE, "w") as outfile:
-        json.dump(data, outfile)
-
 
 # def persist_stopwords(data):
 #     with open('./data/stopwords.json', 'w') as outfile:
@@ -27,18 +16,14 @@ def persist_know(data):
 
 
 class Brain:
-    def __init__(self):
-        # print("brain inited")
+    def __init__(self, config: DavidConfig):
+        self.config = config
         self.train()
 
     def train(self) -> None:
-
-        know = fetch_know()
-
-        training_data = TrainingData(know)
-        config = DavidConfig()
-        self.nlu = SimpleNLU.create({}, config)
-        self.nlu.train(training_data, config)
+        training_data = JsonReader.load(self.config)
+        self.nlu = SimpleNLU.create({}, self.config)
+        self.nlu.train(training_data, self.config)
         self.nlu.persist(file_name=MODEL_FILE, model_dir=MODEL_DIR)
 
     def process(self, text) -> Message:

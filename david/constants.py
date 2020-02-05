@@ -5,3 +5,13 @@ INTENTS_ATTRIBUTE = "intents"
 ENTITIES_ATTRIBUTE = "entities"
 
 CONTEXT_ATTRIBUTE = "context"
+
+DEFAULT_DATA_PATH = "data"
+
+DEFAULT_CONFIG_PATH = "config.yml"
+
+TRAIN_DATA_FILE = "know.json"
+
+DEFAULT_LOG_LEVEL = "INFO"
+
+ENV_LOG_LEVEL = "LOG_LEVEL"

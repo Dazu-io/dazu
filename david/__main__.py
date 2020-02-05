@@ -1,6 +1,8 @@
 from flask import Flask, abort, jsonify, make_response, request
 from flask_cors import CORS
 
+import david.config
+from david.adapters.adapter import MessageAdapter
 from david.assistant import Assistant
 from david.dialog import fetch_dialog
 from david.googleadap import GoogleWebHook
@@ -11,10 +13,17 @@ from david.registry import Registry
 app = Flask(__name__)
 CORS(app)
 
-assistant = Assistant()
-googleWH = GoogleWebHook(assistant)
+messageAdapter = MessageAdapter()
 
-registry = Registry.get_instance()
+# [TODO] This kwargs must from CLI args
+kwargs = {"default_adapter": messageAdapter.name}
+
+config = david.config.load(None, **kwargs)
+
+Registry.registryAdapter(messageAdapter)
+
+assistant = Assistant(config)
+googleWH = GoogleWebHook(assistant)
 
 
 @app.route("/")
@@ -33,7 +42,7 @@ def dialog():
     requestData = request.get_json()
 
     adapterName = request.args.get("adapter")
-    adapter = registry.getAdapter(adapterName)
+    adapter = Registry.getAdapter(config, adapterName)
 
     if not adapter:
         abort(400, "Invalid adapter")
