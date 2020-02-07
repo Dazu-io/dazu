@@ -4,7 +4,6 @@ from flask_cors import CORS
 import david.config
 from david.adapters.adapter import MessageAdapter
 from david.assistant import Assistant
-from david.dialog import fetch_dialog
 from david.googleadap import GoogleWebHook
 from david.registry import Registry
 
@@ -58,15 +57,6 @@ def dialog():
 def google():
     data = request.get_json()
     return jsonify(googleWH.handle(data))
-
-
-# @app.route('/data/dialog')
-# def data_dialog():
-# return jsonify(fetch_dialog())
-
-# @app.route('/data/know')
-# def data_know():
-# return jsonify(fetch_know())
 
 
 def main() -> None:

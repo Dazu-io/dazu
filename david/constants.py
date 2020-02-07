@@ -8,6 +8,8 @@ CONTEXT_ATTRIBUTE = "context"
 
 DEFAULT_DATA_PATH = "data"
 
+DEFAULT_MODELS_PATH = "models"
+
 DEFAULT_CONFIG_PATH = "config.yml"
 
 TRAIN_DATA_FILE = "know.json"
