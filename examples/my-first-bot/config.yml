@@ -1,1 +1,3 @@
-pipeline: simple
+pipeline:
+  - nlu_simple
+  - dialogue_simple

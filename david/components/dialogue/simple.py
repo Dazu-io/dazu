@@ -11,6 +11,7 @@ from david.constants import (
     OUTPUT_TEXT_ATTRIBUTE,
     TEXT_ATTRIBUTE,
 )
+from david.registry import Registry
 from david.typing import Message, TrainingData
 from david.typing.model import Metadata
 
@@ -102,3 +103,6 @@ class SimpleDialogue(Component):
                     return dialog_node
 
         return get_dialog_anythinelse(self.dialog_nodes)
+
+
+Registry.registry(SimpleDialogue)

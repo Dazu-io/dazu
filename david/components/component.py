@@ -102,7 +102,7 @@ class Component(metaclass=Module):
     @classmethod
     def load(
         cls,
-        meta: Dict[Text, Any],
+        component_config: Dict[Text, Any],
         model_dir: Optional[Text] = None,
         model_metadata: Optional["Metadata"] = None,
         cached_component: Optional["Component"] = None,
@@ -119,7 +119,7 @@ class Component(metaclass=Module):
         if cached_component:
             return cached_component
         else:
-            return cls(meta)
+            return cls(component_config)
 
     @classmethod
     def create(

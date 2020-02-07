@@ -1,6 +1,8 @@
 from flask import Flask, abort, jsonify, make_response, request
 from flask_cors import CORS
 
+import david.components.dialogue
+import david.components.nlu
 import david.config
 from david.adapters.adapter import MessageAdapter
 from david.components.engine import Engine

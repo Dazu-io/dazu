@@ -103,10 +103,12 @@ class DavidConfig:
                 known_templates = ", ".join(registered_pipeline_templates.keys())
 
                 raise InvalidConfigError(
-                    f"No pipeline specified and unknown "
-                    f"pipeline template '{template_name}' passed. Known "
+                    f"Unknown pipeline template '{template_name}' passed. Known "
                     f"pipeline templates: {known_templates}"
                 )
+
+        if len(self.__dict__["pipeline"]) == 0:
+            raise InvalidConfigError(f"No pipeline specified")
 
         for key, value in self.items():
             setattr(self, key, value)

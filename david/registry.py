@@ -1,7 +1,5 @@
 from typing import Any, Dict, List, Optional, Text, Type
 
-from david.components.dialogue import SimpleDialogue
-from david.components.nlu import SimpleNLU
 from david.config import DavidConfig
 from david.constants import CONFIG_DEFAULT_ADAPTER
 from david.typing import Module
@@ -12,7 +10,7 @@ ADAPTER_PREFIX = "adapter_"
 # To simplify usage, there are a couple of model templates, that already add
 # necessary components in the right order. They also implement
 # the preexisting `backends`.
-registered_pipeline_templates = {"simple": [SimpleNLU, SimpleDialogue,]}
+registered_pipeline_templates = {"simple": ["nlu_simple", "dialogue_simple",]}
 
 
 def pipeline_template(s: Text) -> Optional[List[Dict[Text, Any]]]:
@@ -30,11 +28,20 @@ class Registry:
     modules = {}
 
     @classmethod
-    def registry(cls, module: Module, prefix: str = ""):
+    def registry(cls, module: Type[Module], prefix: str = ""):
         cls.modules[prefix + module.name()] = module
 
     @classmethod
-    def get(cls, moduleName: str, prefix: str = "", default=None) -> Module:
+    def get(
+        cls,
+        moduleName: str = None,
+        moduleCls: Type[Module] = None,
+        prefix: str = "",
+        default=None,
+    ) -> Module:
+        if not moduleName and moduleCls:
+            moduleName = moduleCls.name()
+
         name = prefix + moduleName
 
         if name in cls.modules:
@@ -47,9 +54,9 @@ class Registry:
         cls.registry(adapter, ADAPTER_PREFIX)
 
     @classmethod
-    def getAdapter(cls, config: DavidConfig, adapterName=None):
+    def getAdapter(cls, config: DavidConfig, adapterName: str = None):
 
         if not adapterName:
             adapterName = config.get(CONFIG_DEFAULT_ADAPTER)
 
-        return cls.get(adapterName, ADAPTER_PREFIX)
+        return cls.get(moduleName=adapterName, prefix=ADAPTER_PREFIX)
