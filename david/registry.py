@@ -1,20 +1,25 @@
-from abc import ABCMeta
-from typing import Type
+from typing import Any, Dict, List, Optional, Text, Type
 
+from david.components.dialogue import SimpleDialogue
+from david.components.nlu import SimpleNLU
 from david.config import DavidConfig
 from david.constants import CONFIG_DEFAULT_ADAPTER
+from david.typing import Module
 
 ADAPTER_PREFIX = "adapter_"
 
 
-class Module(type, metaclass=ABCMeta):
-    """Metaclass with `name` class property"""
+# To simplify usage, there are a couple of model templates, that already add
+# necessary components in the right order. They also implement
+# the preexisting `backends`.
+registered_pipeline_templates = {"simple": [SimpleNLU, SimpleDialogue,]}
 
-    @classmethod
-    def name(cls):
-        """The name property is a function of the class - its __name__."""
 
-        return cls.__name__
+def pipeline_template(s: Text) -> Optional[List[Dict[Text, Any]]]:
+    import copy
+
+    # do a deepcopy to avoid changing the template configurations
+    return copy.deepcopy(registered_pipeline_templates.get(s))
 
 
 # [TODO] refactory as generic registry

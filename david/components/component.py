@@ -2,8 +2,7 @@ import logging
 from typing import Any, Dict, Hashable, List, Optional, Text, Tuple
 
 from david.config import DavidConfig, override_defaults
-from david.registry import Module
-from david.typing import Message, TrainingData
+from david.typing import Message, Module, TrainingData
 from david.typing.model import Metadata
 
 logger = logging.getLogger(__name__)
