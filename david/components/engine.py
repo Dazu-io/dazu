@@ -23,9 +23,9 @@ class Engine:
 
         self.pipeline = self.config.pipeline
 
-        self.train()
+        self.train()  # [TODO] Remove when create 'train' command in CLI
 
-        self.__load()
+        # self.__load() # [TODO] Uncomment when create 'train' command in CLI
 
     def __load(self):
         self.components = [
