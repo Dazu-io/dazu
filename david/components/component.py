@@ -48,16 +48,6 @@ class Component(metaclass=Module):
     features that are used by another component down
     the pipeline to do intent classification."""
 
-    # Component class name is used when integrating it in a
-    # pipeline. E.g. ``[ComponentA, ComponentB]``
-    # will be a proper pipeline definition where ``ComponentA``
-    # is the name of the first component of the pipeline.
-    @property
-    def name(self):
-        """Access the class's property name from an instance."""
-
-        return type(self).name
-
     # Defines what attributes the pipeline component will
     # provide when called. The listed attributes
     # should be set by the component on the message object
@@ -93,7 +83,7 @@ class Component(metaclass=Module):
 
         # makes sure the name of the configuration is part of the config
         # this is important for e.g. persistence
-        component_config["name"] = self.name
+        component_config["name"] = type(self).name()
 
         self.component_config = override_defaults(self.defaults, component_config)
 

@@ -34,6 +34,10 @@ class SimpleNLU(Component):
         self.intent_model = intent_model
 
     @classmethod
+    def name(cls):
+        return "simplenlu"
+
+    @classmethod
     def load(
         cls,
         meta: Dict[Text, Any],
@@ -67,7 +71,7 @@ class SimpleNLU(Component):
 
         self.intent_model = {}
 
-        for intent, samples in training_data.data["intents"].items():
+        for intent, samples in training_data.data["nlu"]["intents"].items():
             self.intent_model[intent] = {}
             for sample in samples:
                 self.intent_model[intent][sample] = {"total": 0, "tokens": {}}
@@ -79,9 +83,6 @@ class SimpleNLU(Component):
                         self.intent_model[intent][sample]["tokens"][t] = 1
 
     def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
-        if not os.path.exists(model_dir):
-            os.makedirs(model_dir)
-
         model_file = os.path.join(model_dir, file_name)
         with open(model_file, "w") as outfile:
             json.dump(self.intent_model, outfile)

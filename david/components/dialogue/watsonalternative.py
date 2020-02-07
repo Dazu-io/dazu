@@ -3,6 +3,7 @@ import os
 from typing import Any, Dict, Optional, Text
 
 from david.components.component import Component
+from david.config import DavidConfig
 from david.constants import (
     CONTEXT_ATTRIBUTE,
     ENTITIES_ATTRIBUTE,
@@ -10,7 +11,7 @@ from david.constants import (
     OUTPUT_TEXT_ATTRIBUTE,
     TEXT_ATTRIBUTE,
 )
-from david.typing import Message
+from david.typing import Message, TrainingData
 from david.typing.model import Metadata
 
 
@@ -35,6 +36,10 @@ class WatsonAlternative(Component):
         super().__init__(component_config)
 
         self.dialog_nodes = dialog_nodes
+
+    @classmethod
+    def name(cls):
+        return "watsonalternative"
 
     @classmethod
     def load(
@@ -63,6 +68,17 @@ class WatsonAlternative(Component):
                 return cls(meta, dialog_nodes)
         else:
             return cls(meta)
+
+    def train(
+        self, training_data: TrainingData, cfg: DavidConfig, **kwargs: Any
+    ) -> None:
+
+        self.dialog_nodes = training_data.data["dialogue"]
+
+    def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
+        model_file = os.path.join(model_dir, file_name)
+        with open(model_file, "w") as outfile:
+            json.dump(self.dialog_nodes, outfile)
 
     def process(self, message: Message, **kwargs: Any) -> None:
 
