@@ -14,7 +14,7 @@ DEFAULT_MODELS_PATH = "models"
 
 DEFAULT_CONFIG_PATH = "config.yml"
 
-TRAIN_DATA_FILE = "know.json"
+TRAIN_DATA_FILE = "training_data.json"
 
 DEFAULT_LOG_LEVEL = "INFO"
 
