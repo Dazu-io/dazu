@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 import david.config
 from david.adapters.adapter import MessageAdapter
-from david.components.dialogue import WatsonAlternative
+from david.components.dialogue import SimpleDialogue
 from david.components.engine import Engine
 from david.components.nlu import SimpleNLU
 from david.constants import CONFIG_DEFAULT_ADAPTER
@@ -21,7 +21,7 @@ config = david.config.load(None, **kwargs)
 
 config.pipeline = [
     SimpleNLU,
-    WatsonAlternative,
+    SimpleDialogue,
 ]
 
 engine = Engine(config)

@@ -35,7 +35,7 @@ class SimpleNLU(Component):
 
     @classmethod
     def name(cls):
-        return "simplenlu"
+        return "nlu_simple"
 
     @classmethod
     def load(

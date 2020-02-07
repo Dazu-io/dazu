@@ -27,7 +27,7 @@ def evalCondition(condition, context, intent, entities):
     return condition == "#" + intent
 
 
-class WatsonAlternative(Component):
+class SimpleDialogue(Component):
     def __init__(
         self,
         component_config: Optional[Dict[Text, Any]] = None,
@@ -39,7 +39,7 @@ class WatsonAlternative(Component):
 
     @classmethod
     def name(cls):
-        return "watsonalternative"
+        return "dialogue_simple"
 
     @classmethod
     def load(

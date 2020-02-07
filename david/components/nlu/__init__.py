@@ -1,1 +1,1 @@
-from david.components.nlu.simplenlu import SimpleNLU
+from david.components.nlu.simple import SimpleNLU

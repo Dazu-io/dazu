@@ -1,1 +1,1 @@
-from david.components.dialogue.watsonalternative import WatsonAlternative
+from david.components.dialogue.simple import SimpleDialogue
