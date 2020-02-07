@@ -1,6 +1,7 @@
 from typing import Dict
 
 from david.adapters.adapter import Adapter
+from david.constants import OUTPUT_TEXT_ATTRIBUTE
 from david.registry import Registry
 from david.typing import Message
 
@@ -21,7 +22,8 @@ class GoogleAdapter(Adapter):
 
     @classmethod
     def output(cls, message: Message) -> Dict:
-        return {"fulfillmentText": message.output["text"]}
+        text = message.get(OUTPUT_TEXT_ATTRIBUTE)
+        return {"fulfillmentText": text}
 
 
 Registry.registryAdapter(GoogleAdapter)

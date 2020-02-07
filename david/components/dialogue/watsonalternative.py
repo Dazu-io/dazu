@@ -7,6 +7,7 @@ from david.constants import (
     CONTEXT_ATTRIBUTE,
     ENTITIES_ATTRIBUTE,
     INTENTS_ATTRIBUTE,
+    OUTPUT_TEXT_ATTRIBUTE,
     TEXT_ATTRIBUTE,
 )
 from david.typing import Message
@@ -72,7 +73,7 @@ class WatsonAlternative(Component):
 
         dialog_node = self.__dialog(text, context, intents, entities)
 
-        message.output = dialog_node["output"]
+        message.set(OUTPUT_TEXT_ATTRIBUTE, dialog_node["output"]["text"])
 
     def __dialog(self, input, context, intents, entities):
         if input == "":

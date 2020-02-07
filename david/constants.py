@@ -1,3 +1,5 @@
+OUTPUT_TEXT_ATTRIBUTE = "output_text"
+
 TEXT_ATTRIBUTE = "text"
 
 INTENTS_ATTRIBUTE = "intents"
