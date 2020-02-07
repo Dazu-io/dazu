@@ -2,7 +2,7 @@ import json
 from abc import abstractmethod
 from typing import Dict, List, Text
 
-from david.registry import Module
+from david.registry import Module, Registry
 from david.typing import Message
 
 
@@ -38,3 +38,6 @@ class MessageAdapter(Adapter):
     @classmethod
     def output(cls, message: Message) -> Dict:
         return message.__dict__
+
+
+Registry.registryAdapter(MessageAdapter)

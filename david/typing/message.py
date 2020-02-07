@@ -4,30 +4,33 @@ from david.constants import (
     CONTEXT_ATTRIBUTE,
     ENTITIES_ATTRIBUTE,
     INTENTS_ATTRIBUTE,
+    OUTPUT_TEXT_ATTRIBUTE,
     TEXT_ATTRIBUTE,
 )
 
 
 class Message:
     def __init__(self, text: Text, context=None, data={}, time=None):
-        self.input = {}
-        self.input["text"] = text
+        self.input = {"text": text}
         self.context = context
         self.time = time
         self.data = data
-        self.output = None
+        self.output = {"text": None}
 
         # if context is not None:
         # self.set(CONTEXT_ATTRIBUTE, context)
 
-    def set(self, prop, info, add_to_output=False) -> None:
+    def set(self, prop, info) -> None:
+        if prop == OUTPUT_TEXT_ATTRIBUTE:
+            self.output["text"] = info
+            return
         self.data[prop] = info
-        # if add_to_output:
-        #     self.output_properties.add(prop)
 
     def get(self, prop, default=None) -> Any:
         if prop == TEXT_ATTRIBUTE:
             return self.input["text"]
+        if prop == OUTPUT_TEXT_ATTRIBUTE:
+            return self.output["text"]
         return self.data.get(prop, default)
 
     @classmethod

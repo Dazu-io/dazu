@@ -4,8 +4,7 @@ from flask_cors import CORS
 import david.config
 from david.adapters.adapter import MessageAdapter
 from david.assistant import Assistant
-from david.dialog import fetch_dialog
-from david.googleadap import GoogleWebHook
+from david.constants import CONFIG_DEFAULT_ADAPTER
 from david.registry import Registry
 
 # from david.brain import fetch_model, fetch_know
@@ -14,14 +13,10 @@ app = Flask(__name__)
 CORS(app)
 
 # [TODO] This kwargs must from CLI args
-kwargs = {"default_adapter": MessageAdapter.name()}
+kwargs = {CONFIG_DEFAULT_ADAPTER: MessageAdapter.name()}
 
 config = david.config.load(None, **kwargs)
-
-Registry.registryAdapter(MessageAdapter)
-
 assistant = Assistant(config)
-googleWH = GoogleWebHook(assistant)
 
 
 @app.route("/")
@@ -52,21 +47,6 @@ def dialog():
     messageOut = assistant.respond(messageIn)
     responseData = adapter.output(messageOut)
     return jsonify(responseData)
-
-
-@app.route("/google", methods=["POST"])
-def google():
-    data = request.get_json()
-    return jsonify(googleWH.handle(data))
-
-
-# @app.route('/data/dialog')
-# def data_dialog():
-# return jsonify(fetch_dialog())
-
-# @app.route('/data/know')
-# def data_know():
-# return jsonify(fetch_know())
 
 
 def main() -> None:

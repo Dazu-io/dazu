@@ -23,9 +23,6 @@ def simmilarity(a, b):
 
 
 class SimpleNLU(Component):
-    def __init__(self):
-        print("SimpleNLU")
-
     def __init__(
         self,
         component_config: Optional[Dict[Text, Any]] = None,

@@ -2,6 +2,9 @@ from abc import ABCMeta
 from typing import Type
 
 from david.config import DavidConfig
+from david.constants import CONFIG_DEFAULT_ADAPTER
+
+ADAPTER_PREFIX = "adapter_"
 
 
 class Module(type, metaclass=ABCMeta):
@@ -36,12 +39,12 @@ class Registry:
 
     @classmethod
     def registryAdapter(cls, adapter: Type[Module]):
-        cls.registry(adapter, "adapter_")
+        cls.registry(adapter, ADAPTER_PREFIX)
 
     @classmethod
     def getAdapter(cls, config: DavidConfig, adapterName=None):
 
         if not adapterName:
-            adapterName = config.get("default_adapter")
+            adapterName = config.get(CONFIG_DEFAULT_ADAPTER)
 
-        return cls.get(adapterName, "adapter_")
+        return cls.get(adapterName, ADAPTER_PREFIX)
