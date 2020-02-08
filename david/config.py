@@ -86,30 +86,29 @@ class DavidConfig:
         self.data = None
 
         self.override(configuration_values)
-
         if self.__dict__["pipeline"] is None:
             # replaces None with empty list
             self.__dict__["pipeline"] = []
-        # elif isinstance(self.__dict__["pipeline"], str):
-        # from rasa.nlu import registry
+        elif isinstance(self.__dict__["pipeline"], str):
+            from david.registry import pipeline_template, registered_pipeline_templates
 
-        # template_name = self.__dict__["pipeline"]
+            template_name = self.__dict__["pipeline"]
 
-        # pipeline = registry.pipeline_template(template_name)
+            pipeline = pipeline_template(template_name)
 
-        # if pipeline:
-        #     # replaces the template with the actual components
-        #     self.__dict__["pipeline"] = pipeline
-        # else:
-        #     known_templates = ", ".join(
-        #         registry.registered_pipeline_templates.keys()
-        #     )
+            if pipeline:
+                # replaces the template with the actual components
+                self.__dict__["pipeline"] = pipeline
+            else:
+                known_templates = ", ".join(registered_pipeline_templates.keys())
 
-        #     raise InvalidConfigError(
-        #         f"No pipeline specified and unknown "
-        #         f"pipeline template '{template_name}' passed. Known "
-        #         f"pipeline templates: {known_templates}"
-        #     )
+                raise InvalidConfigError(
+                    f"Unknown pipeline template '{template_name}' passed. Known "
+                    f"pipeline templates: {known_templates}"
+                )
+
+        if len(self.__dict__["pipeline"]) == 0:
+            raise InvalidConfigError(f"No pipeline specified")
 
         for key, value in self.items():
             setattr(self, key, value)

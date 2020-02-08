@@ -8,6 +8,7 @@ import david.util as util
 from david.components import Component
 from david.config import DavidConfig
 from david.constants import INTENTS_ATTRIBUTE, TEXT_ATTRIBUTE
+from david.registry import Registry
 from david.typing import Message, TrainingData
 from david.typing.model import Metadata
 
@@ -116,3 +117,6 @@ class SimpleNLU(Component):
         intents = list(filter(lambda i: i["confidence"] > 0, intents))
 
         message.set(INTENTS_ATTRIBUTE, intents[:10])
+
+
+Registry.registry(SimpleNLU)

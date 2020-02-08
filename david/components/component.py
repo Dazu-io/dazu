@@ -2,8 +2,7 @@ import logging
 from typing import Any, Dict, Hashable, List, Optional, Text, Tuple
 
 from david.config import DavidConfig, override_defaults
-from david.registry import Module
-from david.typing import Message, TrainingData
+from david.typing import Message, Module, TrainingData
 from david.typing.model import Metadata
 
 logger = logging.getLogger(__name__)
@@ -29,7 +28,7 @@ class UnsupportedLanguageError(Exception):
 
 
 # Component class inspired by RasaHQ/rasa
-class Component(metaclass=Module):
+class Component(Module):
     """A component is a message processing unit in a pipeline.
     Components are collected sequentially in a pipeline. Each component
     is called one after another. This holds for
@@ -103,7 +102,7 @@ class Component(metaclass=Module):
     @classmethod
     def load(
         cls,
-        meta: Dict[Text, Any],
+        component_config: Dict[Text, Any],
         model_dir: Optional[Text] = None,
         model_metadata: Optional["Metadata"] = None,
         cached_component: Optional["Component"] = None,
@@ -120,7 +119,7 @@ class Component(metaclass=Module):
         if cached_component:
             return cached_component
         else:
-            return cls(meta)
+            return cls(component_config)
 
     @classmethod
     def create(
