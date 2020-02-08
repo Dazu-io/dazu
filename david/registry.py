@@ -10,7 +10,9 @@ ADAPTER_PREFIX = "adapter_"
 # To simplify usage, there are a couple of model templates, that already add
 # necessary components in the right order. They also implement
 # the preexisting `backends`.
-registered_pipeline_templates = {"simple": ["nlu_simple", "dialogue_simple",]}
+registered_pipeline_templates = {
+    "simple": [{"name": "SimpleNLU"}, {"name": "SimpleDialogue"},]
+}
 
 
 def pipeline_template(s: Text) -> Optional[List[Dict[Text, Any]]]:
@@ -38,7 +40,7 @@ class Registry:
         moduleCls: Type[Module] = None,
         prefix: str = "",
         default=None,
-    ) -> Module:
+    ) -> Any:
         if not moduleName and moduleCls:
             moduleName = moduleCls.name()
 

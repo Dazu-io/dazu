@@ -23,9 +23,7 @@ class Engine:
         self.config = config
 
         self.pipeline = [
-            Registry.get(moduleName=componentRef)
-            if isinstance(componentRef, str)
-            else Registry.get(moduleCls=componentRef)
+            Registry.get(moduleName=componentRef["name"])
             for componentRef in self.config.pipeline
         ]
 

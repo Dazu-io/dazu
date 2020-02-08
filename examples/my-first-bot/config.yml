@@ -1,3 +1,3 @@
 pipeline:
-  - nlu_simple
-  - dialogue_simple
+  - name: nlu_simple
+  - name: dialogue_simple
