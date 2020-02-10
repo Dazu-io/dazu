@@ -46,6 +46,7 @@ install_requires = [
     "python-Levenshtein==0.12.0",
     "Unidecode==1.0.22",
     "nltk==3.4.5",
+    "ruamel.yaml==0.15.94",
 ]
 
 extras_requires = {
