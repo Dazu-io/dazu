@@ -1,25 +1,14 @@
 from flask import Flask, abort, jsonify, make_response, request
 from flask_cors import CORS
 
-import david.components.dialogue
-import david.components.nlu
-import david.config
-from david.adapters.adapter import MessageAdapter
 from david.components.engine import Engine
-from david.constants import CONFIG_DEFAULT_ADAPTER
+from david.config import DavidConfig
 from david.registry import Registry
 
 # from david.brain import fetch_model, fetch_know
 
 app = Flask(__name__)
 CORS(app)
-
-# [TODO] This kwargs must from CLI args
-kwargs = {CONFIG_DEFAULT_ADAPTER: MessageAdapter.name()}
-
-config = david.config.load(None, **kwargs)
-
-engine = Engine(config)
 
 
 @app.route("/")
@@ -29,7 +18,7 @@ def hi():
 
 @app.route("/train")
 def train():
-    engine.train()
+    Server.engine.train()
     return "OK"
 
 
@@ -38,7 +27,7 @@ def dialog():
     requestData = request.get_json()
 
     adapterName = request.args.get("adapter")
-    adapter = Registry.getAdapter(config, adapterName)
+    adapter = Registry.getAdapter(Server.config, adapterName)
 
     if not adapter:
         abort(400, "Invalid adapter")
@@ -47,10 +36,22 @@ def dialog():
         abort(400, "Invalid input")
 
     messageIn = adapter.input(requestData)
-    messageOut = engine.respond(messageIn)
+    messageOut = Server.engine.respond(messageIn)
     responseData = adapter.output(messageOut)
     return jsonify(responseData)
 
 
-def serve() -> None:
-    app.run(host="0.0.0.0")
+class Server:
+
+    config: DavidConfig = None
+
+    engine: Engine = None
+
+    @classmethod
+    def prepare(cls, config: DavidConfig, engine: Engine):
+        cls.config = config
+        cls.engine = engine
+
+    @classmethod
+    def start(cls) -> None:
+        app.run(host="0.0.0.0")
