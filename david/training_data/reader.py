@@ -6,7 +6,7 @@ from david.registry import Module
 from david.typing import TrainingData
 
 
-class Reader(metaclass=Module):
+class Reader(Module):
     @classmethod
     @abstractmethod
     def load(cls, config: DavidConfig) -> TrainingData:

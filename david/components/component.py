@@ -30,7 +30,7 @@ class UnsupportedLanguageError(Exception):
 # [TODO] Fix class Compenent to pas build
 
 # Component class inspired by RasaHQ/rasa
-class Component(metaclass=Module):
+class Component(Module):
     """A component is a message processing unit in a pipeline.
     Components are collected sequentially in a pipeline. Each component
     is called one after another. This holds for

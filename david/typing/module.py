@@ -1,7 +1,7 @@
 from abc import ABCMeta
 
 
-class Module(type, metaclass=ABCMeta):
+class Module:
     """Metaclass with `name` class property"""
 
     @classmethod
