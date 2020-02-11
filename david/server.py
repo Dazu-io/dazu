@@ -16,10 +16,10 @@ def hi():
     return "Hi, am i David!"
 
 
-@app.route("/train")
-def train():
-    Server.engine.train()
-    return "OK"
+# @app.route("/train")
+# def train():
+#     Server.engine.train()
+#     return "OK"
 
 
 @app.route("/dialog", methods=["POST"])
