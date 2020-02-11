@@ -58,7 +58,7 @@ class Registry:
     @classmethod
     def getAdapter(cls, config: DavidConfig, adapterName: str = None):
 
-        if not adapterName:
+        if not adapterName or adapterName == "default":
             adapterName = config.get(CONFIG_DEFAULT_ADAPTER)
 
         return cls.get(moduleName=adapterName, prefix=ADAPTER_PREFIX)

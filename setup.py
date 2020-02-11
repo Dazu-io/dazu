@@ -43,6 +43,7 @@ tests_requires = [
 
 install_requires = [
     "sanic>=19.12.2",
+    "sanic-openapi>=0.6.1",
     "python-Levenshtein==0.12.0",
     "Unidecode==1.0.22",
     "ruamel.yaml==0.15.94",
