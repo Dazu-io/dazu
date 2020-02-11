@@ -7,6 +7,7 @@
 setuptools >= 41.0.0
 
 #lint/format/types
+autoflake>=2.1.1
 pylint==2.4.4
 flake8==3.7.9
 black>=19.10b0
