@@ -14,7 +14,7 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 dev_requires = [
-    "autoflake>=2.1.1",
+    "autoflake>=1.3.1",
     "black>=19.10b0",
     "pylint==2.4.4",
     "flake8==3.7.9",
