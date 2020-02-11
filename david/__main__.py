@@ -1,5 +1,3 @@
-import david.components.dialogue
-import david.components.nlu
 import david.config
 from david.adapters.adapter import MessageAdapter
 from david.cli.run import run

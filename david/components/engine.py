@@ -3,7 +3,7 @@ from typing import List, Type
 
 from david.components import Component
 from david.config import DavidConfig
-from david.constants import DEFAULT_DATA_PATH, DEFAULT_MODELS_PATH, TEXT_ATTRIBUTE
+from david.constants import DEFAULT_MODELS_PATH, TEXT_ATTRIBUTE
 from david.registry import Registry
 from david.training_data.formats import JsonReader
 from david.typing import Message

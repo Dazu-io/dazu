@@ -1,4 +1,4 @@
-from flask import Flask, abort, jsonify, make_response, request
+from flask import Flask, abort, jsonify, request
 from flask_cors import CORS
 
 from david.components.engine import Engine

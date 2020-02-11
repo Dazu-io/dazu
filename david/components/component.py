@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Dict, Hashable, List, Optional, Text, Tuple
+from typing import Any, Dict, Hashable, List, Optional, Text
 
 from david.config import DavidConfig, override_defaults
 from david.typing import Message, Module, TrainingData
@@ -149,7 +149,6 @@ class Component(Module):
         It's mostly used to initialize framework environments
         like MITIE and spacy
         (e.g. loading word vectors for the pipeline)."""
-        pass
 
     def train(
         self, training_data: TrainingData, cfg: DavidConfig, **kwargs: Any
@@ -163,7 +162,6 @@ class Component(Module):
         on any context attributes created by a call to
         :meth:`rasa.nlu.components.Component.train`
         of components previous to this one."""
-        pass
 
     def process(self, message: Message, **kwargs: Any) -> None:
         """Process an incoming message.
@@ -175,12 +173,9 @@ class Component(Module):
         on any context attributes created by a call to
         :meth:`rasa.nlu.components.Component.process`
         of components previous to this one."""
-        pass
 
     def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
         """Persist this component to disk for future loading."""
-
-        pass
 
     @classmethod
     def cache_key(
