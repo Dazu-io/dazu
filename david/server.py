@@ -1,44 +1,40 @@
-from flask import Flask, abort, jsonify, request
-from flask_cors import CORS
+from sanic import Sanic
+from sanic.exceptions import abort
+from sanic.response import json, text
 
 from david.components.engine import Engine
 from david.config import DavidConfig
 from david.registry import Registry
 
-# from david.brain import fetch_model, fetch_know
-
-app = Flask(__name__)
-CORS(app)
+app = Sanic()
 
 
 @app.route("/")
-def hi():
-    return "Hi, am i David!"
-
-
-# @app.route("/train")
-# def train():
-#     Server.engine.train()
-#     return "OK"
+def hi(request):
+    text("Hi, am i David!")
 
 
 @app.route("/dialog", methods=["POST"])
-def dialog():
-    requestData = request.get_json()
+def dialog(request):
+    requestData = request.json
 
-    adapterName = request.args.get("adapter")
+    adapterName = request.get_args().get("adapter")
     adapter = Registry.getAdapter(Server.config, adapterName)
 
     if not adapter:
-        abort(400, "Invalid adapter")
+        abort(400)
+        text("Invalid adapter")
+        return
 
     if not adapter.validade_data(requestData):
-        abort(400, "Invalid input")
+        abort(400)
+        text("Invalid input")
+        return
 
     messageIn = adapter.input(requestData)
     messageOut = Server.engine.respond(messageIn)
     responseData = adapter.output(messageOut)
-    return jsonify(responseData)
+    return json(responseData)
 
 
 class Server:
@@ -54,4 +50,4 @@ class Server:
 
     @classmethod
     def start(cls) -> None:
-        app.run(host="0.0.0.0")
+        app.run(host="0.0.0.0", port=5000)
