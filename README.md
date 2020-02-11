@@ -125,4 +125,5 @@ This project is licensed under the Apache-2.0 - see the [LICENSE](LICENSE) file 
 
 ## Acknowledgments
 
-`Still needed`
+* **Arthur Temporim** - [arthurTemporim](https://github.com/arthurTemporim)
+
