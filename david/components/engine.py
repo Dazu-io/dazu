@@ -27,9 +27,9 @@ class Engine:
             for componentRef in self.config.pipeline
         ]
 
-        self.train()  # [TODO] Remove when create 'train' command in CLI
+        self.train()  # TODO(ralphg6) Remove when create 'train' command in CLI
 
-        # self.__load() # [TODO] Uncomment when create 'train' command in CLI
+        # self.__load() # TODO(ralphg6) Uncomment when create 'train' command in CLI
 
     def __load(self):
         self.components = [

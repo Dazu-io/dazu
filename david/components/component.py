@@ -27,8 +27,6 @@ class UnsupportedLanguageError(Exception):
         )
 
 
-# [TODO] Fix class Compenent to pas build
-
 # Component class inspired by RasaHQ/rasa
 class Component(Module):
     """A component is a message processing unit in a pipeline.
