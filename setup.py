@@ -46,8 +46,8 @@ install_requires = [
     "flask-cors==3.0.6",
     "python-Levenshtein==0.12.0",
     "Unidecode==1.0.22",
-    "nltk==3.4.5",
     "ruamel.yaml==0.15.94",
+    "argparse>=1.4.0",
 ]
 
 extras_requires = {

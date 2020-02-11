@@ -16,6 +16,7 @@ stopwords = fetch_stopwords()
 NON_CONTENT = r"[^\w\d\s]"
 
 
+# TODO(ralphg6) Move to SimpleNLU
 def tokenize(sentence):
     # print "sentence",sentence
     # remove accents
