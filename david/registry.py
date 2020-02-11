@@ -22,7 +22,7 @@ def pipeline_template(s: Text) -> Optional[List[Dict[Text, Any]]]:
     return copy.deepcopy(registered_pipeline_templates.get(s))
 
 
-# [TODO] refactory as generic registry
+# TODO(ralphg6) refactory as generic registry
 class Registry:
 
     _instance = None

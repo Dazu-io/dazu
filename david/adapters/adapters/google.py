@@ -17,8 +17,8 @@ class GoogleAdapter(Adapter):
 
     @classmethod
     def input(cls, payload: Dict) -> Message:
-        input = payload["queryResult"]["queryText"]
-        return Message.build(input)
+        inputData = payload["queryResult"]["queryText"]
+        return Message.build(inputData)
 
     @classmethod
     def output(cls, message: Message) -> Dict:

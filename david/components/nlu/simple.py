@@ -10,7 +10,7 @@ from david.config import DavidConfig
 from david.constants import INTENTS_ATTRIBUTE, TEXT_ATTRIBUTE
 from david.registry import Registry
 from david.typing import Message, TrainingData
-from david.typing.model import Metadata
+from david.typing.model import Metadata  # noqa
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
 

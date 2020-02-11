@@ -14,6 +14,7 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 dev_requires = [
+    "autoflake>=1.3.1",
     "black>=19.10b0",
     "pylint==2.4.4",
     "flake8==3.7.9",
@@ -45,7 +46,8 @@ install_requires = [
     "flask-cors==3.0.6",
     "python-Levenshtein==0.12.0",
     "Unidecode==1.0.22",
-    "nltk==3.4.5",
+    "ruamel.yaml==0.15.94",
+    "argparse>=1.4.0",
 ]
 
 extras_requires = {

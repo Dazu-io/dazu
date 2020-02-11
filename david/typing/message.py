@@ -1,4 +1,4 @@
-from typing import Any, Dict, Text
+from typing import Any, Text
 
 from david.constants import (
     CONTEXT_ATTRIBUTE,

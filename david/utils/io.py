@@ -6,17 +6,14 @@ import logging
 import os
 import tarfile
 import tempfile
-import typing
 import warnings
 import zipfile
 from asyncio import AbstractEventLoop
 from io import BytesIO as IOReader
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Text, Type, Union
+from typing import Any, Dict, List, Text, Union
 
 import ruamel.yaml as yaml
-
-from david.constants import DEFAULT_LOG_LEVEL, ENV_LOG_LEVEL
 
 DEFAULT_ENCODING = "utf-8"
 

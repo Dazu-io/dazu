@@ -1,8 +1,7 @@
 import json
 import re
-from typing import Any, Dict, List, Optional, Text, Tuple
+from typing import Any, Text
 
-import nltk
 import unidecode
 
 
@@ -17,6 +16,7 @@ stopwords = fetch_stopwords()
 NON_CONTENT = r"[^\w\d\s]"
 
 
+# TODO(ralphg6) Move to SimpleNLU
 def tokenize(sentence):
     # print "sentence",sentence
     # remove accents

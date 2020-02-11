@@ -33,10 +33,12 @@ clean:
 
 formatter:
 	isort -rc -q david tests
+	autoflake -i -r --remove-all-unused-imports --ignore-init-module-imports --remove-unused-variables david tests
 	black david tests
 
 lint:
 	isort -rc -q -c david tests
+	autoflake -i -r --remove-all-unused-imports --ignore-init-module-imports --remove-unused-variables -c david tests
 	black --check david tests
 	flake8 david tests
 
