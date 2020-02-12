@@ -1,9 +1,5 @@
 import json
-import re
-from typing import Any, Dict, List, Optional, Text, Tuple
-
-import nltk
-import unidecode
+from typing import Any, Text
 
 
 def json_to_string(obj: Any, **kwargs: Any) -> Text:

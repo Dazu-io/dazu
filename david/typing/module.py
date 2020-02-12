@@ -1,6 +1,3 @@
-from abc import ABCMeta
-
-
 class Module:
     """Metaclass with `name` class property"""
 

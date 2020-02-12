@@ -1,6 +1,5 @@
-import json
 from abc import abstractmethod
-from typing import Dict, List, Text
+from typing import Dict
 
 from david.registry import Module, Registry
 from david.typing import Message
