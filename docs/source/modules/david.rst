@@ -6,27 +6,14 @@ Subpackages
 
 .. toctree::
 
+   david.adapters
    david.components
+   david.training_data
    david.typing
+   david.utils
 
 Submodules
 ----------
-
-david.assistant module
-----------------------
-
-.. automodule:: david.assistant
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-david.brain module
-------------------
-
-.. automodule:: david.brain
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 david.config module
 -------------------
@@ -44,18 +31,10 @@ david.constants module
    :undoc-members:
    :show-inheritance:
 
-david.dialog module
--------------------
+david.registry module
+---------------------
 
-.. automodule:: david.dialog
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-david.googleadap module
------------------------
-
-.. automodule:: david.googleadap
+.. automodule:: david.registry
    :members:
    :undoc-members:
    :show-inheritance:

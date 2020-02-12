@@ -6,8 +6,15 @@ from david.typing import Message
 
 
 class Adapter(Module):
+    """
+    Adapter Class documentation
+    """
+
     @classmethod
     def validade_data(self, payload: Dict) -> bool:
+        """
+        validate_data method documentation
+        """
         return True
 
     @classmethod

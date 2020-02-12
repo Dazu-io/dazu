@@ -20,6 +20,14 @@ david.typing.model module
    :undoc-members:
    :show-inheritance:
 
+david.typing.module module
+--------------------------
+
+.. automodule:: david.typing.module
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 david.typing.training\_data module
 ----------------------------------
 
