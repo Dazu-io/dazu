@@ -14,6 +14,8 @@ RUN pip install -r requirements.txt
 ## Copy rest of code
 COPY david /app
 
-ENTRYPOINT ["python"]
+RUN pip install .
 
-CMD ["app.py"]
+ENTRYPOINT ["david"]
+
+CMD ["run"]

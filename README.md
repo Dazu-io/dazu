@@ -24,13 +24,14 @@ docker-compose up --build
 ```bash
 pip install -e .
 cd examples/my-first-bot
-david
+david train
+david run
 ```
 
 * After that you should see this output:
 
 ```bash
-david
+david run
  * Serving Flask app "david.__main__" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
@@ -60,7 +61,8 @@ pip install -e .
 
 ```bash
 cd examples/my-first-bot
-david
+david train
+david run
 ```
 
 1. Have fun :rocket:
@@ -123,4 +125,5 @@ This project is licensed under the Apache-2.0 - see the [LICENSE](LICENSE) file 
 
 ## Acknowledgments
 
-`Still needed`
+* **Arthur Temporim** - [arthurTemporim](https://github.com/arthurTemporim)
+

@@ -1,59 +1,57 @@
-from flask import Flask, abort, jsonify, make_response, request
-from flask_cors import CORS
+import argparse
 
-import david.components.dialogue
-import david.components.nlu
 import david.config
-from david.adapters.adapter import MessageAdapter
-from david.components.engine import Engine
-from david.constants import CONFIG_DEFAULT_ADAPTER
-from david.registry import Registry
-
-# from david.brain import fetch_model, fetch_know
-
-app = Flask(__name__)
-CORS(app)
-
-# [TODO] This kwargs must from CLI args
-kwargs = {CONFIG_DEFAULT_ADAPTER: MessageAdapter.name()}
-
-config = david.config.load(None, **kwargs)
-
-engine = Engine(config)
+from david import version
+from david.cli import run, train
 
 
-@app.route("/")
-def hi():
-    return "Hi, am i David!"
+def create_argument_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="david",
+        description="An engine for chatbots. Inspired by Watson Assistant and Rasa.",
+    )
+
+    parser.add_argument(
+        "--version",
+        action="store_true",
+        default=argparse.SUPPRESS,
+        help="Print installed David version",
+    )
+
+    parent_parser = argparse.ArgumentParser(add_help=False)
+    parent_parsers = [parent_parser]
+
+    subparsers = parser.add_subparsers(help="David commands")
+
+    run.add_subparser(subparsers, parents=parent_parsers)
+    train.add_subparser(subparsers, parents=parent_parsers)
+
+    return parser
 
 
-@app.route("/train")
-def train():
-    engine.train()
-    return "OK"
-
-
-@app.route("/dialog", methods=["POST"])
-def dialog():
-    requestData = request.get_json()
-
-    adapterName = request.args.get("adapter")
-    adapter = Registry.getAdapter(config, adapterName)
-
-    if not adapter:
-        abort(400, "Invalid adapter")
-
-    if not adapter.validade_data(requestData):
-        abort(400, "Invalid input")
-
-    messageIn = adapter.input(requestData)
-    messageOut = engine.respond(messageIn)
-    responseData = adapter.output(messageOut)
-    return jsonify(responseData)
+def print_version() -> None:
+    print("David", version.__version__)
 
 
 def main() -> None:
-    app.run(host="0.0.0.0")
+    # run(config)
+
+    arg_parser = create_argument_parser()
+    cmdline_arguments = arg_parser.parse_args()
+
+    if hasattr(cmdline_arguments, "func"):
+        kwargs = cmdline_arguments.__dict__
+
+        config = david.config.load(None, **kwargs)
+
+        cmdline_arguments.func(config, cmdline_arguments)
+    elif hasattr(cmdline_arguments, "version"):
+        print_version()
+    else:
+        # user has not provided a subcommand, let's print the help
+        print("No command specified.")
+        arg_parser.print_help()
+        exit(1)
 
 
 if __name__ == "__main__":

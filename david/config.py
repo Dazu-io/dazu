@@ -1,7 +1,7 @@
 import copy
 import os
 import warnings
-from typing import Any, Dict, List, Optional, Text, Tuple, Union
+from typing import Any, Dict, List, Optional, Text, Union
 
 import yaml
 

@@ -22,7 +22,6 @@ def pipeline_template(s: Text) -> Optional[List[Dict[Text, Any]]]:
     return copy.deepcopy(registered_pipeline_templates.get(s))
 
 
-# [TODO] refactory as generic registry
 class Registry:
 
     _instance = None
@@ -58,7 +57,7 @@ class Registry:
     @classmethod
     def getAdapter(cls, config: DavidConfig, adapterName: str = None):
 
-        if not adapterName:
+        if not adapterName or adapterName == "default":
             adapterName = config.get(CONFIG_DEFAULT_ADAPTER)
 
         return cls.get(moduleName=adapterName, prefix=ADAPTER_PREFIX)

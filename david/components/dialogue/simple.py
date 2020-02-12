@@ -13,7 +13,7 @@ from david.constants import (
 )
 from david.registry import Registry
 from david.typing import Message, TrainingData
-from david.typing.model import Metadata
+from david.typing.model import Metadata  # noqa
 
 
 def get_dialog_welcome(dialog_nodes):
