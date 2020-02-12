@@ -28,5 +28,4 @@ def run(config: DavidConfig, args: argparse.Namespace):
 
     engine = Engine(config)
 
-    Server.prepare(config, engine)
-    Server.start()
+    Server.start(config, engine)
