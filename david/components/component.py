@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 class UnsupportedLanguageError(Exception):
     """Raised when a component is created but the language is not supported.
-    Attributes:
-        component -- component name
-        language -- language that component doesn't support
+
+    :param component: component name
+    :param language: language that component doesn't support
     """
 
     def __init__(self, component: Text, language: Text) -> None:

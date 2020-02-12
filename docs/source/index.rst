@@ -9,8 +9,9 @@ Welcome to David's documentation!
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
+    :glob:
 
-    adapters
+    modules/*
 
 
 
