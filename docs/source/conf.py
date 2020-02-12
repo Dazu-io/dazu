@@ -15,6 +15,8 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../../"))
 
+from david import version as david_version
+
 
 # -- Project information -----------------------------------------------------
 
@@ -23,7 +25,7 @@ copyright = "2020, Raphael Pinto"
 author = "Raphael Pinto"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.1"
+release = david_version.__version__
 
 
 # -- General configuration ---------------------------------------------------
