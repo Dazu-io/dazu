@@ -10,6 +10,7 @@ class Adapter(Module):
     """
     Adapter Class documentation
     """
+
     @classmethod
     def validade_data(self, payload: Dict) -> bool:
         """
