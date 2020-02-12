@@ -1,5 +1,19 @@
 {
     "nlu": {
+        "stopwords": [
+            "é",
+            "da",
+            "meu",
+            "na",
+            "qual",
+            "quanto",
+            "quantas",
+            "a",
+            "o",
+            "e",
+            "eu",
+            "quero"
+        ],
         "intents": {
             "saudacao": [
                 "Oi",
