@@ -38,7 +38,8 @@ def enable_async_loop_debugging(
 
 
 def fix_yaml_loader() -> None:
-    """Ensure that any string read by yaml is represented as unicode."""
+    """Ensure that any string read by yaml is represented as unicode.
+    """
 
     def construct_yaml_str(self, node):
         # Override the default string handling function
@@ -50,7 +51,8 @@ def fix_yaml_loader() -> None:
 
 
 def replace_environment_variables() -> None:
-    """Enable yaml loader to process the environment variables in the yaml."""
+    """Enable yaml loader to process the environment variables in the yaml.
+    """
     import re
     import os
 
@@ -59,7 +61,8 @@ def replace_environment_variables() -> None:
     yaml.add_implicit_resolver("!env_var", env_var_pattern)
 
     def env_var_constructor(loader, node):
-        """Process environment variables found in the YAML."""
+        """Process environment variables found in the YAML.
+        """
         value = loader.construct_scalar(node)
         expanded_vars = os.path.expandvars(value)
         if "$" in expanded_vars:
@@ -76,8 +79,7 @@ def replace_environment_variables() -> None:
 
 def read_yaml(content: Text) -> Union[List[Any], Dict[Text, Any]]:
     """Parses yaml from a text.
-     Args:
-        content: A text containing yaml content.
+    :param content: A text containing yaml content.
     """
     fix_yaml_loader()
 
@@ -105,7 +107,8 @@ def read_yaml(content: Text) -> Union[List[Any], Dict[Text, Any]]:
 
 
 def read_file(filename: Text, encoding: Text = DEFAULT_ENCODING) -> Any:
-    """Read text from a file."""
+    """Read text from a file.
+    """
 
     try:
         with open(filename, encoding=encoding) as f:
@@ -115,7 +118,8 @@ def read_file(filename: Text, encoding: Text = DEFAULT_ENCODING) -> Any:
 
 
 def read_json_file(filename: Text) -> Any:
-    """Read json from a file."""
+    """Read json from a file.
+    """
     content = read_file(filename)
     try:
         return json.loads(content)
@@ -127,15 +131,15 @@ def read_json_file(filename: Text) -> Any:
 
 
 def dump_obj_as_json_to_file(filename: Text, obj: Any) -> None:
-    """Dump an object as a json string to a file."""
+    """Dump an object as a json string to a file.
+    """
 
     write_text_file(json.dumps(obj, indent=2), filename)
 
 
 def read_config_file(filename: Text) -> Dict[Text, Any]:
     """Parses a yaml configuration file. Content needs to be a dictionary
-     Args:
-        filename: The path to the file which should be read.
+    :param filename: The path to the file which should be read.
     """
     content = read_yaml(read_file(filename))
 
@@ -153,15 +157,15 @@ def read_config_file(filename: Text) -> Dict[Text, Any]:
 
 def read_yaml_file(filename: Text) -> Union[List[Any], Dict[Text, Any]]:
     """Parses a yaml file.
-     Args:
-        filename: The path to the file which should be read.
+    :param filename: The path to the file which should be read.
     """
     return read_yaml(read_file(filename, DEFAULT_ENCODING))
 
 
 def unarchive(byte_array: bytes, directory: Text) -> Text:
     """Tries to unpack a byte array interpreting it as an archive.
-    Tries to use tar first to unpack, if that fails, zip will be used."""
+    Tries to use tar first to unpack, if that fails, zip will be used.
+    """
 
     try:
         tar = tarfile.open(fileobj=IOReader(byte_array))
@@ -177,9 +181,8 @@ def unarchive(byte_array: bytes, directory: Text) -> Text:
 
 def write_yaml_file(data: Dict, filename: Union[Text, Path]) -> None:
     """Writes a yaml file.
-     Args:
-        data: The data to write.
-        filename: The path to the file which should be written.
+    :param data: The data to write.
+    :param filename: The path to the file which should be written.
     """
     with open(str(filename), "w", encoding=DEFAULT_ENCODING) as outfile:
         yaml.dump(data, outfile, default_flow_style=False, allow_unicode=True)
@@ -192,11 +195,10 @@ def write_text_file(
     append: bool = False,
 ) -> None:
     """Writes text to a file.
-    Args:
-        content: The content to write.
-        file_path: The path to which the content should be written.
-        encoding: The encoding which should be used.
-        append: Whether to append to the file or to truncate the file.
+    :param content: The content to write.
+    :param file_path: The path to which the content should be written.
+    :param encoding: The encoding which should be used.
+    :param append: Whether to append to the file or to truncate the file.
     """
     mode = "a" if append else "w"
     with open(file_path, mode, encoding=encoding) as file:
@@ -215,7 +217,8 @@ def is_subdirectory(path: Text, potential_parent_directory: Text) -> bool:
 
 def create_temporary_file(data: Any, suffix: Text = "", mode: Text = "w+") -> Text:
     """Creates a tempfile.NamedTemporaryFile object for data.
-    mode defines NamedTemporaryFile's  mode parameter in py3."""
+    mode defines NamedTemporaryFile's  mode parameter in py3.
+    """
 
     encoding = None if "b" in mode else DEFAULT_ENCODING
     f = tempfile.NamedTemporaryFile(
@@ -228,7 +231,8 @@ def create_temporary_file(data: Any, suffix: Text = "", mode: Text = "w+") -> Te
 
 
 def create_path(file_path: Text) -> None:
-    """Makes sure all directories in the 'file_path' exists."""
+    """Makes sure all directories in the 'file_path' exists.
+    """
 
     parent_dir = os.path.dirname(os.path.abspath(file_path))
     if not os.path.exists(parent_dir):
@@ -236,21 +240,24 @@ def create_path(file_path: Text) -> None:
 
 
 def create_directory_for_file(file_path: Text) -> None:
-    """Creates any missing parent directories of this file path."""
+    """Creates any missing parent directories of this file path.
+    """
 
     create_directory(os.path.dirname(file_path))
 
 
 def list_files(path: Text) -> List[Text]:
     """Returns all files excluding hidden files.
-    If the path points to a file, returns the file."""
+    If the path points to a file, returns the file.
+    """
 
     return [fn for fn in list_directory(path) if os.path.isfile(fn)]
 
 
 def list_subdirectories(path: Text) -> List[Text]:
     """Returns all folders excluding hidden files.
-    If the path points to a file, returns an empty list."""
+    If the path points to a file, returns an empty list.
+    """
 
     return [fn for fn in glob.glob(os.path.join(path, "*")) if os.path.isdir(fn)]
 
@@ -263,7 +270,8 @@ def _filename_without_prefix(file: Text) -> Text:
 def list_directory(path: Text) -> List[Text]:
     """Returns all files and folders excluding hidden files.
     If the path points to a file, returns the file. This is a recursive
-    implementation returning files in any depth of the path."""
+    implementation returning files in any depth of the path.
+    """
 
     if not isinstance(path, str):
         raise ValueError(
@@ -293,7 +301,8 @@ def list_directory(path: Text) -> List[Text]:
 
 def create_directory(directory_path: Text) -> None:
     """Creates a directory and its super paths.
-    Succeeds even if the path already exists."""
+    Succeeds even if the path already exists.
+    """
 
     try:
         os.makedirs(directory_path)
