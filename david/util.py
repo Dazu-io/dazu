@@ -7,7 +7,12 @@ import unidecode
 
 
 def fetch_stopwords():
-    return set(line.strip() for line in open("./data/stopwords.txt", "r"))
+    stopwords = set()
+    try:
+        stopwords = set(line.strip() for line in open("./data/stopwords.txt", "r"))
+    except Exception as e:
+        pass
+    return stopwords
 
 
 stopwords = fetch_stopwords()
