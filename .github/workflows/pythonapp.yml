@@ -26,8 +26,8 @@ jobs:
 #       run: |
 #         pip install pytest
 #         pytest
-  build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+  build:
+    name: Build Python 🐍 distributions 📦
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
@@ -48,6 +48,10 @@ jobs:
           --source
           --binary
           --out-dir dist/
+  publish:
+    name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+    runs-on: ubuntu-18.04
+    steps:
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:
