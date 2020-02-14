@@ -21,3 +21,6 @@ api/output/intent_model.json
 !.gitkeep
 .vscode/
 dist/
+
+# pytest
+.coverage
