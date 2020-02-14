@@ -1,4 +1,5 @@
 import pytest
+
 from david.adapters import adapter
 from david.typing import message
 
@@ -26,13 +27,19 @@ def test_input():
     with pytest.raises(KeyError):
         message_adapter.input(wrong_payload)
 
+
 def test_output():
     message_adapter = adapter.MessageAdapter()
     correct_payload = {"input": {"text": "text"}}
     message = message_adapter.input(correct_payload)
-    expected_output = {'input': {'text': 'text'}, 'context': {}, 'time': None, 'data': {}, 'output': {'text': None}}
+    expected_output = {
+        "input": {"text": "text"},
+        "context": {},
+        "time": None,
+        "data": {},
+        "output": {"text": None},
+    }
 
     assert message_adapter.output(message) == expected_output
     with pytest.raises(AttributeError):
         message_adapter.output({})
-
