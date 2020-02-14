@@ -28,6 +28,7 @@ jobs:
 #         pytest
   build:
     name: Build Python 🐍 distributions 📦
+    needs: test
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
@@ -43,6 +44,7 @@ jobs:
       run: python setup.py sdist bdist_wheel
   publish:
     name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+    needs: build
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
