@@ -49,13 +49,13 @@ jobs:
       with:
         python-version: 3.6
     - name: Publish distribution 📦 to Test PyPI
-      with:
+      env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
         TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
       run: python -m pip install --user --upgrade twine
     - name: Publish distribution 📦 to PyPI
-      with:
+      env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.pypi_password }}
         TWINE_REPOSITORY_URL: https://pypi.org/legacy/
