@@ -1,18 +1,45 @@
-from david.components import Component
-import os
 import json
-import david.util as util
-from typing import Dict, Text, Any, Optional
+import os
+import re
+from typing import Any, Dict, List, Optional, Text
+
+import unidecode
 from Levenshtein import distance
 
-
-from david.constants import INTENTS_ATTRIBUTE
-
+from david.components import Component
 from david.config import DavidConfig
-
-from david.training_data import Message, TrainingData
+from david.constants import INTENTS_ATTRIBUTE, TEXT_ATTRIBUTE
+from david.registry import Registry
+from david.typing import Message, TrainingData
+from david.typing.model import Metadata  # noqa
 
 SIMMILARITY_ERROR_ACCEPTED = 0.3
+
+
+NON_CONTENT = r"[^\w\d\s]"
+
+
+def tokenize(stopwords: List[str], sentence: str):
+    # print "sentence",sentence
+    # remove accents
+    sentence = unidecode.unidecode(sentence)
+    # print "sentence1",sentence
+    # remove non content
+    sentence = re.sub(NON_CONTENT, "", sentence)
+    # print "sentence2",sentence
+    # lower
+    sentence = sentence.lower()
+    # print "sentence3",sentence
+    # split
+    tokens = sentence.split(" ")
+
+    tokens = list(filter(lambda t: t not in stopwords, tokens))
+
+    tokens = list(filter(lambda t: len(t) > 0, tokens))
+
+    # print("tokens", tokens)
+
+    return tokens
 
 
 def simmilarity(a, b):
@@ -24,9 +51,6 @@ def simmilarity(a, b):
 
 
 class SimpleNLU(Component):
-    def __init__(self):
-        print("SimpleNLU")
-
     def __init__(
         self,
         component_config: Optional[Dict[Text, Any]] = None,
@@ -36,6 +60,10 @@ class SimpleNLU(Component):
         super().__init__(component_config)
 
         self.intent_model = intent_model
+
+    @classmethod
+    def name(cls):
+        return "nlu_simple"
 
     @classmethod
     def load(
@@ -55,6 +83,7 @@ class SimpleNLU(Component):
         calls to components previous
         to this one."""
 
+        file_name = meta.get("file")
         model_file = os.path.join(model_dir, file_name)
 
         if os.path.exists(model_file):
@@ -68,35 +97,36 @@ class SimpleNLU(Component):
         self, training_data: TrainingData, cfg: DavidConfig, **kwargs: Any
     ) -> None:
 
-        self.intent_model = {}
+        self.intent_model = {"stopwords": training_data.data["nlu"]["stopwords"]}
 
-        for intent, samples in training_data.data["intents"].items():
-            self.intent_model[intent] = {}
+        intents = {}
+
+        for intent, samples in training_data.data["nlu"]["intents"].items():
+            intents[intent] = {}
             for sample in samples:
-                self.intent_model[intent][sample] = {"total": 0, "tokens": {}}
-                for t in util.tokenize(sample):
-                    self.intent_model[intent][sample]["total"] += 1
-                    if t in self.intent_model[intent][sample]["tokens"]:
-                        self.intent_model[intent][sample]["tokens"][t] += 1
+                intents[intent][sample] = {"total": 0, "tokens": {}}
+                for t in tokenize(self.intent_model["stopwords"], sample):
+                    intents[intent][sample]["total"] += 1
+                    if t in intents[intent][sample]["tokens"]:
+                        intents[intent][sample]["tokens"][t] += 1
                     else:
-                        self.intent_model[intent][sample]["tokens"][t] = 1
+                        intents[intent][sample]["tokens"][t] = 1
+
+        self.intent_model["intents"] = intents
 
     def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
-        if not os.path.exists(model_dir):
-            os.makedirs(model_dir)
-
         model_file = os.path.join(model_dir, file_name)
         with open(model_file, "w") as outfile:
             json.dump(self.intent_model, outfile)
 
     def process(self, message: Message, **kwargs: Any) -> None:
 
-        input = message.text
+        input = message.get(TEXT_ATTRIBUTE)
 
-        tokens = util.tokenize(input)
+        tokens = tokenize(self.intent_model["stopwords"], input)
         # print ("tokens", tokens)
         intents = {}
-        for intent, samples in self.intent_model.items():
+        for intent, samples in self.intent_model["intents"].items():
             intents[intent] = 0
             for s, smeta in samples.items():
                 brutal_score = 0
@@ -118,3 +148,6 @@ class SimpleNLU(Component):
         intents = list(filter(lambda i: i["confidence"] > 0, intents))
 
         message.set(INTENTS_ATTRIBUTE, intents[:10])
+
+
+Registry.registry(SimpleNLU)

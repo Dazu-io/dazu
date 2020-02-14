@@ -1,9 +1,65 @@
-from typing import Any, Dict, Optional, Text, List, Tuple
+import copy
+import os
+import warnings
+from typing import Any, Dict, List, Optional, Text, Union
+
+import yaml
+
+import david.utils.io
+from david.constants import DEFAULT_CONFIG_PATH
+from david.util import json_to_string
 
 
-## Config class inspired by RasaHQ/rasa
+class InvalidConfigError(ValueError):
+    """Raised if an invalid configuration is encountered."""
+
+    def __init__(self, message: Text) -> None:
+        super().__init__(message)
 
 
+def load(config: Optional[Union[Text, Dict]] = None, **kwargs: Any) -> "DavidConfig":
+    if isinstance(config, Dict):
+        return _load_from_dict(config, **kwargs)
+
+    file_config = {}
+    if config is None and os.path.isfile(DEFAULT_CONFIG_PATH):
+        config = DEFAULT_CONFIG_PATH
+
+    if config is not None:
+        try:
+            file_config = david.utils.io.read_config_file(config)
+        except yaml.parser.ParserError as e:
+            raise InvalidConfigError(
+                f"Failed to read configuration file '{config}'. Error: {e}"
+            )
+
+    return _load_from_dict(file_config, **kwargs)
+
+
+def _load_from_dict(config: Dict, **kwargs: Any) -> "DavidConfig":
+    if kwargs:
+        config.update(kwargs)
+    return DavidConfig(config)
+
+
+def component_config_from_pipeline(
+    index: int,
+    pipeline: List[Dict[Text, Any]],
+    defaults: Optional[Dict[Text, Any]] = None,
+) -> Dict[Text, Any]:
+    try:
+        c = pipeline[index]
+        return override_defaults(defaults, c)
+    except IndexError:
+        warnings.warn(
+            f"Tried to get configuration value for component "
+            f"number {index} which is not part of the pipeline. "
+            f"Returning `defaults`."
+        )
+        return override_defaults(defaults, {})
+
+
+# Config class inspired by RasaHQ/rasa
 def override_defaults(
     defaults: Optional[Dict[Text, Any]], custom: Optional[Dict[Text, Any]]
 ) -> Dict[Text, Any]:
@@ -30,45 +86,29 @@ class DavidConfig:
         self.data = None
 
         self.override(configuration_values)
-
         if self.__dict__["pipeline"] is None:
             # replaces None with empty list
             self.__dict__["pipeline"] = []
         elif isinstance(self.__dict__["pipeline"], str):
-            from rasa.nlu import registry
+            from david.registry import pipeline_template, registered_pipeline_templates
 
             template_name = self.__dict__["pipeline"]
-            new_names = {
-                "spacy_sklearn": "pretrained_embeddings_spacy",
-                "tensorflow_embedding": "supervised_embeddings",
-            }
-            if template_name in new_names:
-                warnings.warn(
-                    f"You have specified the pipeline template "
-                    f"'{template_name}' which has been renamed to "
-                    f"'{new_names[template_name]}'. "
-                    f"Please update your code as it will no "
-                    f"longer work with future versions of "
-                    f"Rasa.",
-                    FutureWarning,
-                )
-                template_name = new_names[template_name]
 
-            pipeline = registry.pipeline_template(template_name)
+            pipeline = pipeline_template(template_name)
 
             if pipeline:
                 # replaces the template with the actual components
                 self.__dict__["pipeline"] = pipeline
             else:
-                known_templates = ", ".join(
-                    registry.registered_pipeline_templates.keys()
-                )
+                known_templates = ", ".join(registered_pipeline_templates.keys())
 
                 raise InvalidConfigError(
-                    f"No pipeline specified and unknown "
-                    f"pipeline template '{template_name}' passed. Known "
+                    f"Unknown pipeline template '{template_name}' passed. Known "
                     f"pipeline templates: {known_templates}"
                 )
+
+        if len(self.__dict__["pipeline"]) == 0:
+            raise InvalidConfigError(f"No pipeline specified")
 
         for key, value in self.items():
             setattr(self, key, value)

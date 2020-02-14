@@ -1,0 +1,18 @@
+# base and pipeline dependencies
+# requirements_full.txt includes requirements.txt, so no need to
+# include it here.
+-r requirements.txt
+
+
+setuptools >= 41.0.0
+
+#lint/format/types
+autoflake>=1.3.1
+pylint==2.4.4
+flake8==3.7.9
+black>=19.10b0
+pre_commit>=1.21.0
+pytype==2019.7.11
+
+# test requirements
+pytest==5.3.5

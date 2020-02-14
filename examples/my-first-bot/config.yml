@@ -1,0 +1,3 @@
+pipeline:
+  - name: nlu_simple
+  - name: dialogue_simple

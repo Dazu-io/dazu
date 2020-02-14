@@ -1,22 +1,34 @@
+import logging
+from typing import Any, Dict, Hashable, List, Optional, Text
+
 from david.config import DavidConfig, override_defaults
-from david.training_data import TrainingData, Message
+from david.typing import Message, Module, TrainingData
+from david.typing.model import Metadata
 
-from typing import Any, Dict, Hashable, Optional, Text, List, Tuple
-
-## Component class inspired by RasaHQ/rasa
-
-
-class ComponentMetaclass(type):
-    """Metaclass with `name` class property"""
-
-    @property
-    def name(cls):
-        """The name property is a function of the class - its __name__."""
-
-        return cls.__name__
+logger = logging.getLogger(__name__)
 
 
-class Component(metaclass=ComponentMetaclass):
+class UnsupportedLanguageError(Exception):
+    """Raised when a component is created but the language is not supported.
+
+    :param component: component name
+    :param language: language that component doesn't support
+    """
+
+    def __init__(self, component: Text, language: Text) -> None:
+        self.component = component
+        self.language = language
+
+        super().__init__(component, language)
+
+    def __str__(self) -> Text:
+        return (
+            f"component '{self.component}' does not support language '{self.language}'."
+        )
+
+
+# Component class inspired by RasaHQ/rasa
+class Component(Module):
     """A component is a message processing unit in a pipeline.
     Components are collected sequentially in a pipeline. Each component
     is called one after another. This holds for
@@ -34,16 +46,6 @@ class Component(metaclass=ComponentMetaclass):
     processing. For example, a featurizer component can provide
     features that are used by another component down
     the pipeline to do intent classification."""
-
-    # Component class name is used when integrating it in a
-    # pipeline. E.g. ``[ComponentA, ComponentB]``
-    # will be a proper pipeline definition where ``ComponentA``
-    # is the name of the first component of the pipeline.
-    @property
-    def name(self):
-        """Access the class's property name from an instance."""
-
-        return type(self).name
 
     # Defines what attributes the pipeline component will
     # provide when called. The listed attributes
@@ -80,7 +82,7 @@ class Component(metaclass=ComponentMetaclass):
 
         # makes sure the name of the configuration is part of the config
         # this is important for e.g. persistence
-        component_config["name"] = self.name
+        component_config["name"] = type(self).name()
 
         self.component_config = override_defaults(self.defaults, component_config)
 
@@ -100,7 +102,7 @@ class Component(metaclass=ComponentMetaclass):
     @classmethod
     def load(
         cls,
-        meta: Dict[Text, Any],
+        component_config: Dict[Text, Any],
         model_dir: Optional[Text] = None,
         model_metadata: Optional["Metadata"] = None,
         cached_component: Optional["Component"] = None,
@@ -117,7 +119,7 @@ class Component(metaclass=ComponentMetaclass):
         if cached_component:
             return cached_component
         else:
-            return cls(meta)
+            return cls(component_config)
 
     @classmethod
     def create(
@@ -145,7 +147,6 @@ class Component(metaclass=ComponentMetaclass):
         It's mostly used to initialize framework environments
         like MITIE and spacy
         (e.g. loading word vectors for the pipeline)."""
-        pass
 
     def train(
         self, training_data: TrainingData, cfg: DavidConfig, **kwargs: Any
@@ -159,7 +160,6 @@ class Component(metaclass=ComponentMetaclass):
         on any context attributes created by a call to
         :meth:`rasa.nlu.components.Component.train`
         of components previous to this one."""
-        pass
 
     def process(self, message: Message, **kwargs: Any) -> None:
         """Process an incoming message.
@@ -171,12 +171,9 @@ class Component(metaclass=ComponentMetaclass):
         on any context attributes created by a call to
         :meth:`rasa.nlu.components.Component.process`
         of components previous to this one."""
-        pass
 
     def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
         """Persist this component to disk for future loading."""
-
-        pass
 
     @classmethod
     def cache_key(

@@ -1,6 +1,6 @@
 import os
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -13,33 +13,21 @@ with open("david/version.py") as f:
 with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
-tests_requires = [
-    "pytest~=4.5",
-    # "pytest-cov~=2.7",
-    # "pytest-localserver~=0.5.0",
-    # "pytest-sanic~=1.0.0",
-    # "responses~=0.9.0",
-    # "freezegun~=0.3.0",
-    # "nbsphinx>=0.3",
-    # "aioresponses~=0.6.0",
-    # "moto~=1.3.8",
-    # "fakeredis~=1.0",
-    # "mongomock~=3.18",
-]
 
-install_requires = [
-    "Flask==1.0.2",
-    "flask-cors==3.0.6",
-    "python-Levenshtein==0.12.0",
-    "Unidecode==1.0.22",
-    "nltk==3.4.5",
-    "pylint==2.4.4",
-    "flake8==3.7.9",
-    "setuptools >= 41.0.0",
-]
+# Get requirements from files.
+# Solution from https://stackoverflow.com/a/25193001/12704331
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
+
+
+dev_requires = parse_requirements('requirements-dev.txt')
+docs_requires = parse_requirements('requirements-docs.txt')
+install_requires = parse_requirements('requirements.txt')
 
 extras_requires = {
-    "test": tests_requires,
+    "dev": dev_requires,
     # "spacy": ["spacy>=2.1,<2.2"],
     # "convert": ["tensorflow_text~=1.15.1", "tensorflow_hub~=0.6.0"],
     # "mitie": ["mitie"],
@@ -64,8 +52,7 @@ setup(
     entry_points={"console_scripts": ["david=david.__main__:main"]},
     version=__version__,
     install_requires=install_requires,
-    tests_require=tests_requires,
-    extras_require=extras_requires,
+    extras_requires=extras_requires,
     include_package_data=True,
     description="An engine for chatbots. Inspired by Watson Assistant and Rasa.",
     long_description=long_description,

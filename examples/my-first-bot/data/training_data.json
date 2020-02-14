@@ -1,0 +1,118 @@
+{
+    "nlu": {
+        "stopwords": [
+            "é",
+            "da",
+            "meu",
+            "na",
+            "qual",
+            "quanto",
+            "quantas",
+            "a",
+            "o",
+            "e",
+            "eu",
+            "quero"
+        ],
+        "intents": {
+            "saudacao": [
+                "Oi",
+                "Olá"
+            ],
+            "despedida": [
+                "tchau",
+                "Até mais!",
+                "Adeus"
+            ],
+            "saldo": [
+                "Qual é meu saldo?",
+                "Quanto tenho na conta?",
+                "Saldo da conta corrente",
+                "Quantas pilas eu tenho?",
+                "Qual é o saldo da minha conta?"
+            ],
+            "extrato": [
+                "Extrato da conta",
+                "Extrato da conta corrente"
+            ],
+            "recarregar-celular": [
+                "Quero recarregar meu celular!",
+                "Quero colocar crédito no meu celular!"
+            ],
+            "pagar-receber": [
+                "link pra receber"
+            ],
+            "transferir": [
+                "Transferir dinheiro"
+            ],
+            "horario-agencias": [
+                "Qual é o horário de funcionamento das agências?"
+            ],
+            "irmaos": [
+                "Você tem irmãos?"
+            ]
+        }
+    },
+    "dialogue": [
+        {
+            "condition": "#saudacao",
+            "output": {
+                "text": "Olá, eu sou o David!!!!"
+            }
+        },
+        {
+            "condition": "#despedida",
+            "output": {
+                "text": "Muito obrigado pela atenção! Precisando estou por aqui!"
+            }
+        },
+        {
+            "condition": "#saldo",
+            "output": {
+                "text": "Seu saldo é R$ 1.234,56!"
+            }
+        },
+        {
+            "condition": "#extrato",
+            "output": {
+                "text": "Segue seu extrato!!!"
+            }
+        },
+        {
+            "condition": "#recarregar-celular",
+            "output": {
+                "text": "Celular recarregado!"
+            }
+        },
+        {
+            "condition": "#pagar-receber",
+            "output": {
+                "text": "Segue o link!"
+            }
+        },
+        {
+            "condition": "#transferir",
+            "output": {
+                "text": "Dinheiro transferido!"
+            }
+        },
+        {
+            "condition": "#horario-agencias",
+            "output": {
+                "text": "As agências funcionam das 11h as 16h!"
+            }
+        },
+        {
+            "condition": "#irmaos",
+            "output": {
+                "text": "Sim! Meus irmãos são: Caleb, Josué e Hadassa!"
+            }
+        },
+        {
+            "condition": "true",
+            "output": {
+                "text": "Desculpe, não entendi! Pode falar de outra forma?"
+            }
+        }
+    ]
+}
