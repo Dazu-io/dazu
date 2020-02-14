@@ -43,7 +43,7 @@ jobs:
     - name: Install twine
       run: python -m pip install --user --upgrade twine
     - name: Publish distribution 📦 to Test PyPI
-      if: startsWith(github.event.ref, 'develop')
+      if: github.ref == 'refs/heads/develop'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
