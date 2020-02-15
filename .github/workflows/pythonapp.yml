@@ -32,8 +32,6 @@ jobs:
         # The report file must be there, otherwise Code Climate won't find it
         coverageCommand: make coverage
         debug: true
-        coverageLocations:
-          "${{github.workspace}}/.coverage:coverage.py"
 #     - name: Test with pytest
 #       run: |
 #         pip install pytest
