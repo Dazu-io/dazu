@@ -30,7 +30,7 @@ jobs:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
       with:
         # The report file must be there, otherwise Code Climate won't find it
-        coverageCommand: make test
+        coverageCommand: make coverage
         debug: true
         coverageLocations:
           "${{github.workspace}}/.coverage:coverage.py"

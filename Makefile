@@ -57,7 +57,10 @@ prepare-tests-ubuntu: prepare-tests-files
 prepare-tests-files:
 
 test: clean
-	coverage run -m  pytest tests 
+	coverage run -m  pytest tests
+
+coverage: test
+	coverage xml
 
 #release:
 #	python3 scripts/release.py

@@ -24,3 +24,5 @@ dist/
 
 # pytest
 .coverage
+coverage.xml
+coverage/codeclimate.json
