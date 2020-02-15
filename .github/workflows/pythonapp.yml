@@ -24,6 +24,7 @@ jobs:
         make types    
     - name: Test and publish code coverage
       uses: paambaati/codeclimate-action@v2.4.0
+      # if: github.ref == 'refs/heads/develop'
       env:
         # Set CC_TEST_REPORTER_ID as secret of your repo
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
@@ -31,6 +32,8 @@ jobs:
         # The report file must be there, otherwise Code Climate won't find it
         coverageCommand: make test
         debug: true
+        coverageLocations:
+          "${{github.workspace}}/.coverage:coverage.py"
 #     - name: Test with pytest
 #       run: |
 #         pip install pytest
