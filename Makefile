@@ -57,8 +57,7 @@ prepare-tests-ubuntu: prepare-tests-files
 prepare-tests-files:
 
 test: clean
-	# OMP_NUM_THREADS can improve overral performance using one thread by process (on tensorflow), avoiding overload
-	OMP_NUM_THREADS=1 pytest tests -n $(JOBS) --cov rasa
+	coverage run -m  pytest tests 
 
 #release:
 #	python3 scripts/release.py
