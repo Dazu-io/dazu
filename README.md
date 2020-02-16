@@ -2,7 +2,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/david-ausubel/badge/?version=latest)](https://david-ausubel.readthedocs.io/en/latest/?badge=latest)
 ![BUILD](https://github.com/ralphg6/david/workflows/Python%20application/badge.svg?branch=master)
-
+[![Open Source Helpers](https://www.codetriage.com/ralphg6/david/badges/users.svg)](https://www.codetriage.com/ralphg6/david)
 
 **David** is a powerfull engine dialogue engine with two main parts: `NLU` and `dialogue`. The main objetive of this project is too use existing chatbots projects and uses it to develop your solution.
 
