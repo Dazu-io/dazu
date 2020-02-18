@@ -22,6 +22,11 @@ jobs:
     - name: Checking types
       run: |
         make types    
+    - name: Build docs
+      run: |
+        pip install -e .
+        pip install -r requirements-docs.txt
+        make docs
     - name: Test and publish code coverage
       uses: paambaati/codeclimate-action@v2.4.0
       # if: github.ref == 'refs/heads/develop'
@@ -32,10 +37,6 @@ jobs:
         # The report file must be there, otherwise Code Climate won't find it
         coverageCommand: make coverage
         debug: true
-#     - name: Test with pytest
-#       run: |
-#         pip install pytest
-#         pytest
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     needs: test
