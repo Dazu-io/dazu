@@ -1,4 +1,4 @@
-.PHONY: clean test lint
+.PHONY: clean test lint docs
 
 JOBS ?= 1
 
@@ -44,6 +44,9 @@ lint:
 
 types:
 	pytype --keep-going david
+
+docs: 
+	cd docs/ && $(MAKE) html && cd ..
 
 prepare-tests-macos: prepare-wget-macos prepare-tests-files
 	brew install graphviz || true

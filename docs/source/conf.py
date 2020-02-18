@@ -10,12 +10,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+
+from david import version as david_version
 import os
 import sys
 
 sys.path.insert(0, os.path.abspath("../../"))
-
-from david import version as david_version
 
 
 # -- Project information -----------------------------------------------------
@@ -33,7 +33,7 @@ release = david_version.__version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc"]
+extensions = ["sphinx.ext.autodoc", "m2r"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -56,4 +56,6 @@ html_theme = "sphinx_rtd_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
+# Added configuration
 master_doc = "index"
+source_suffix = ['.rst', '.md']
