@@ -22,9 +22,9 @@ def parse_requirements(filename):
     return [line for line in lineiter if line and not line.startswith("#")]
 
 
-dev_requires = parse_requirements('requirements-dev.txt')
-docs_requires = parse_requirements('requirements-docs.txt')
-install_requires = parse_requirements('requirements.txt')
+dev_requires = parse_requirements("requirements-dev.txt")
+docs_requires = parse_requirements("requirements-docs.txt")
+install_requires = parse_requirements("requirements.txt")
 
 extras_requires = {
     "dev": dev_requires,

@@ -28,7 +28,7 @@ def process_dialog(requestData, adapter_name=None):
     if not adapter:
         abort(404, "Invalid adapter")
 
-    if not adapter.validade_data(requestData):
+    if not adapter.validate_data(requestData):
         abort(400, "Invalid input")
 
     messageIn = adapter.input(requestData)

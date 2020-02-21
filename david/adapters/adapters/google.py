@@ -12,7 +12,7 @@ class GoogleAdapter(Adapter):
         return "google"
 
     @classmethod
-    def validade_data(cls, payload: Dict) -> bool:
+    def validate_data(cls, payload: Dict) -> bool:
         return "queryResult" in payload and "queryText" in payload["queryResult"]
 
     @classmethod

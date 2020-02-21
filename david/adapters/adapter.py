@@ -11,7 +11,7 @@ class Adapter(Module):
     """
 
     @classmethod
-    def validade_data(self, payload: Dict) -> bool:
+    def validate_data(self, payload: Dict) -> bool:
         """
         validate_data method documentation
         """
@@ -34,7 +34,7 @@ class MessageAdapter(Adapter):
         return "message"
 
     @classmethod
-    def validade_data(cls, payload: Dict) -> bool:
+    def validate_data(cls, payload: Dict) -> bool:
         return "input" in payload and "text" in payload["input"]
 
     @classmethod

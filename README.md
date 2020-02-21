@@ -82,7 +82,7 @@ This will add a hook to the repository, which reformats files on every commit.
 
 If you want to set it up manually, install black via `pip install -r requirements-dev.txt`.
 To reformat files execute
-```
+```bash
 make formatter
 ```
 
@@ -90,7 +90,7 @@ make formatter
 
 If you want to check types on the codebase, install `pytype` using `pip install -r requirements-dev.txt`.
 To check the types execute
-```
+```bash
 make types
 ```
 
