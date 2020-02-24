@@ -9,7 +9,7 @@
 
 **Dazu** is a powerfull engine dialogue engine with two main parts: `NLU` and `dialogue`. The main objetive of this project is too use existing chatbots projects and uses it to develop your solution.
 
-The name was inspired by [Dazu Ausubel](https://novaescola.org.br/conteudo/262/dazu-ausubel-e-a-aprendizagem-significativa) because the main objective of this project was to build a collaborative platform to maintain Bots for learning.
+The name was inspired by [David Ausubel](https://novaescola.org.br/conteudo/262/david-ausubel-e-a-aprendizagem-significativa) because the main objective of this project was to build a collaborative platform to maintain Bots for learning.
 
 Inspired by Watson Assistant and Rasa.
 
@@ -129,5 +129,5 @@ This project is licensed under the Apache-2.0 - see the [LICENSE](LICENSE) file 
 
 ## Acknowledgments
 
-* **Arthur Temporim** - [arthurTemporim](https://github.com/arthurTemporim)
+* **Arthur Temporim** - *Nominator* - [arthurTemporim](https://github.com/arthurTemporim)
 
