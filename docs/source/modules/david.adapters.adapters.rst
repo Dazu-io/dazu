@@ -1,13 +1,13 @@
-david.adapters.adapters package
+dazu.adapters.adapters package
 ===============================
 
 Submodules
 ----------
 
-david.adapters.adapters.google module
+dazu.adapters.adapters.google module
 -------------------------------------
 
-.. automodule:: david.adapters.adapters.google
+.. automodule:: dazu.adapters.adapters.google
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +16,7 @@ david.adapters.adapters.google module
 Module contents
 ---------------
 
-.. automodule:: david.adapters.adapters
+.. automodule:: dazu.adapters.adapters
    :members:
    :undoc-members:
    :show-inheritance:

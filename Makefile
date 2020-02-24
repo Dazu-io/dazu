@@ -1,4 +1,4 @@
-.PHONY: clean test lint
+.PHONY: clean test lint docs
 
 JOBS ?= 1
 
@@ -23,6 +23,7 @@ help:
 	@echo "        Use the JOBS environment variable to configure number of workers (default: 1)."
 
 clean:
+	find . -name '__pycache__' -exec rm -fR {} +
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f  {} +
@@ -32,18 +33,21 @@ clean:
 	rm -rf docs/_build
 
 formatter:
-	isort -rc -q david tests
-	autoflake -i -r --remove-all-unused-imports --ignore-init-module-imports --remove-unused-variables david tests
-	black david tests
+	isort -rc -q dazu tests
+	autoflake -i -r --remove-all-unused-imports --ignore-init-module-imports --remove-unused-variables dazu tests
+	black dazu tests
 
 lint:
-	isort -rc -q -c david tests
-	autoflake -i -r --remove-all-unused-imports --ignore-init-module-imports --remove-unused-variables -c david tests
-	black --check david tests
-	flake8 david tests
+	isort -rc -q -c dazu tests
+	autoflake -i -r --remove-all-unused-imports --ignore-init-module-imports --remove-unused-variables -c dazu tests
+	black --check dazu tests
+	flake8 dazu tests
 
 types:
-	pytype --keep-going david
+	pytype --keep-going dazu
+
+docs: 
+	cd docs/ && $(MAKE) html && cd ..
 
 prepare-tests-macos: prepare-wget-macos prepare-tests-files
 	brew install graphviz || true
@@ -57,8 +61,10 @@ prepare-tests-ubuntu: prepare-tests-files
 prepare-tests-files:
 
 test: clean
-	# OMP_NUM_THREADS can improve overral performance using one thread by process (on tensorflow), avoiding overload
-	OMP_NUM_THREADS=1 pytest tests -n $(JOBS) --cov rasa
+	coverage run -m  pytest tests
+
+coverage: test
+	coverage xml
 
 #release:
 #	python3 scripts/release.py

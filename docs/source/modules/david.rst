@@ -1,4 +1,4 @@
-david package
+dazu package
 =============
 
 Subpackages
@@ -6,51 +6,51 @@ Subpackages
 
 .. toctree::
 
-   david.adapters
-   david.components
-   david.training_data
-   david.typing
-   david.utils
+   dazu.adapters
+   dazu.components
+   dazu.training_data
+   dazu.typing
+   dazu.utils
 
 Submodules
 ----------
 
-david.config module
+dazu.config module
 -------------------
 
-.. automodule:: david.config
+.. automodule:: dazu.config
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.constants module
+dazu.constants module
 ----------------------
 
-.. automodule:: david.constants
+.. automodule:: dazu.constants
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.registry module
+dazu.registry module
 ---------------------
 
-.. automodule:: david.registry
+.. automodule:: dazu.registry
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.util module
+dazu.util module
 -----------------
 
-.. automodule:: david.util
+.. automodule:: dazu.util
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.version module
+dazu.version module
 --------------------
 
-.. automodule:: david.version
+.. automodule:: dazu.version
    :members:
    :undoc-members:
    :show-inheritance:
@@ -59,7 +59,7 @@ david.version module
 Module contents
 ---------------
 
-.. automodule:: david
+.. automodule:: dazu
    :members:
    :undoc-members:
    :show-inheritance:

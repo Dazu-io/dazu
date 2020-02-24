@@ -1,12 +1,15 @@
-# David
+# Dazu
 
-[![Documentation Status](https://readthedocs.org/projects/david-ausubel/badge/?version=latest)](https://david-ausubel.readthedocs.io/en/latest/?badge=latest)
-![BUILD](https://github.com/ralphg6/david/workflows/Python%20application/badge.svg?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/dazu-ausubel/badge/?version=latest)](https://dazu-ausubel.readthedocs.io/en/latest/?badge=latest)
+![BUILD](https://github.com/ralphg6/dazu/workflows/Python%20application/badge.svg?branch=master)
+[![Open Source Helpers](https://www.codetriage.com/ralphg6/dazu/badges/users.svg)](https://www.codetriage.com/ralphg6/dazu)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2eb8ba0d056e3b52f34a/maintainability)](https://codeclimate.com/github/ralphg6/dazu/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2eb8ba0d056e3b52f34a/test_coverage)](https://codeclimate.com/github/ralphg6/dazu/test_coverage)
 
 
-**David** is a powerfull engine dialogue engine with two main parts: `NLU` and `dialogue`. The main objetive of this project is too use existing chatbots projects and uses it to develop your solution.
+**Dazu** is a powerfull engine dialogue engine with two main parts: `NLU` and `dialogue`. The main objetive of this project is too use existing chatbots projects and uses it to develop your solution.
 
-The name was inspired by [David Ausubel](https://novaescola.org.br/conteudo/262/david-ausubel-e-a-aprendizagem-significativa) because the main objective of this project was to build a collaborative platform to maintain Bots for learning.
+The name was inspired by [Dazu Ausubel](https://novaescola.org.br/conteudo/262/dazu-ausubel-e-a-aprendizagem-significativa) because the main objective of this project was to build a collaborative platform to maintain Bots for learning.
 
 Inspired by Watson Assistant and Rasa.
 
@@ -25,15 +28,15 @@ docker-compose up --build
 ```bash
 pip install -e .
 cd examples/my-first-bot
-david train
-david run
+dazu train
+dazu run
 ```
 
 * After that you should see this output:
 
 ```bash
-david run
- * Serving Flask app "david.__main__" (lazy loading)
+dazu run
+ * Serving Flask app "dazu.__main__" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
    Use a production WSGI server instead.
@@ -51,7 +54,7 @@ All the dependencies can be find in `requirements.txt` and development in `requi
 
 * A step by step installation guide:
 
-1. Run these commands to install `david` in your python virtual env:
+1. Run these commands to install `dazu` in your python virtual env:
 
 ```bash
 pip install -r requirements-dev.txt
@@ -62,8 +65,8 @@ pip install -e .
 
 ```bash
 cd examples/my-first-bot
-david train
-david run
+dazu train
+dazu run
 ```
 
 1. Have fun :rocket:
@@ -82,7 +85,7 @@ This will add a hook to the repository, which reformats files on every commit.
 
 If you want to set it up manually, install black via `pip install -r requirements-dev.txt`.
 To reformat files execute
-```
+```bash
 make formatter
 ```
 
@@ -90,7 +93,7 @@ make formatter
 
 If you want to check types on the codebase, install `pytype` using `pip install -r requirements-dev.txt`.
 To check the types execute
-```
+```bash
 make types
 ```
 
@@ -118,7 +121,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Raphael Pinto** - *Creator* - [ralphg6](https://github.com/ralphg6)
 
-See also the list of [contributors](https://github.com/ralphg6/david/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ralphg6/dazu/graphs/contributors) who participated in this project.
 
 ## License
 

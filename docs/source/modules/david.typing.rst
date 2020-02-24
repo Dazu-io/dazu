@@ -1,37 +1,37 @@
-david.typing package
+dazu.typing package
 ====================
 
 Submodules
 ----------
 
-david.typing.message module
+dazu.typing.message module
 ---------------------------
 
-.. automodule:: david.typing.message
+.. automodule:: dazu.typing.message
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.typing.model module
+dazu.typing.model module
 -------------------------
 
-.. automodule:: david.typing.model
+.. automodule:: dazu.typing.model
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.typing.module module
+dazu.typing.module module
 --------------------------
 
-.. automodule:: david.typing.module
+.. automodule:: dazu.typing.module
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.typing.training\_data module
+dazu.typing.training\_data module
 ----------------------------------
 
-.. automodule:: david.typing.training_data
+.. automodule:: dazu.typing.training_data
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,7 +40,7 @@ david.typing.training\_data module
 Module contents
 ---------------
 
-.. automodule:: david.typing
+.. automodule:: dazu.typing
    :members:
    :undoc-members:
    :show-inheritance:

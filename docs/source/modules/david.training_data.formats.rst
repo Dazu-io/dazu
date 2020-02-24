@@ -1,13 +1,13 @@
-david.training\_data.formats package
+dazu.training\_data.formats package
 ====================================
 
 Submodules
 ----------
 
-david.training\_data.formats.json module
+dazu.training\_data.formats.json module
 ----------------------------------------
 
-.. automodule:: david.training_data.formats.json
+.. automodule:: dazu.training_data.formats.json
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +16,7 @@ david.training\_data.formats.json module
 Module contents
 ---------------
 
-.. automodule:: david.training_data.formats
+.. automodule:: dazu.training_data.formats
    :members:
    :undoc-members:
    :show-inheritance:

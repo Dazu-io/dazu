@@ -22,10 +22,21 @@ jobs:
     - name: Checking types
       run: |
         make types    
-#     - name: Test with pytest
-#       run: |
-#         pip install pytest
-#         pytest
+    - name: Build docs
+      run: |
+        pip install -e .
+        pip install -r requirements-docs.txt
+        make docs
+    - name: Test and publish code coverage
+      uses: paambaati/codeclimate-action@v2.4.0
+      # if: github.ref == 'refs/heads/develop'
+      env:
+        # Set CC_TEST_REPORTER_ID as secret of your repo
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      with:
+        # The report file must be there, otherwise Code Climate won't find it
+        coverageCommand: make coverage
+        debug: true
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     needs: test

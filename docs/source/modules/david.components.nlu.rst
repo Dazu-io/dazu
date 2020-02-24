@@ -1,13 +1,13 @@
-david.components.nlu package
+dazu.components.nlu package
 ============================
 
 Submodules
 ----------
 
-david.components.nlu.simple module
+dazu.components.nlu.simple module
 ----------------------------------
 
-.. automodule:: david.components.nlu.simple
+.. automodule:: dazu.components.nlu.simple
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +16,7 @@ david.components.nlu.simple module
 Module contents
 ---------------
 
-.. automodule:: david.components.nlu
+.. automodule:: dazu.components.nlu
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,4 +1,4 @@
-david.components package
+dazu.components package
 ========================
 
 Subpackages
@@ -6,24 +6,24 @@ Subpackages
 
 .. toctree::
 
-   david.components.dialogue
-   david.components.nlu
+   dazu.components.dialogue
+   dazu.components.nlu
 
 Submodules
 ----------
 
-david.components.component module
+dazu.components.component module
 ---------------------------------
 
-.. automodule:: david.components.component
+.. automodule:: dazu.components.component
    :members:
    :undoc-members:
    :show-inheritance:
 
-david.components.engine module
+dazu.components.engine module
 ------------------------------
 
-.. automodule:: david.components.engine
+.. automodule:: dazu.components.engine
    :members:
    :undoc-members:
    :show-inheritance:
@@ -32,7 +32,7 @@ david.components.engine module
 Module contents
 ---------------
 
-.. automodule:: david.components
+.. automodule:: dazu.components
    :members:
    :undoc-members:
    :show-inheritance:
