@@ -1,13 +1,13 @@
-david.utils package
+dazu.utils package
 ===================
 
 Submodules
 ----------
 
-david.utils.io module
+dazu.utils.io module
 ---------------------
 
-.. automodule:: david.utils.io
+.. automodule:: dazu.utils.io
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +16,7 @@ david.utils.io module
 Module contents
 ---------------
 
-.. automodule:: david.utils
+.. automodule:: dazu.utils
    :members:
    :undoc-members:
    :show-inheritance:

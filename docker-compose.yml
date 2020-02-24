@@ -2,9 +2,9 @@ version: '3.3'
 
 services:
 
-  david-api:
+  dazu-api:
     build: .
-    image: labbsr0x/david
+    image: dazu-io/dazu
     network_mode: bridge
     ports:
       - 5000:5000

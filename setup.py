@@ -6,7 +6,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 # Avoids IDE errors, but actual version is read from version.py
 __version__ = None
-with open("david/version.py") as f:
+with open("dazu/version.py") as f:
     exec(f.read())
 
 # Get the long description from the README file
@@ -36,7 +36,7 @@ extras_requires = {
 }
 
 setup(
-    name="david",
+    name="dazu",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
@@ -49,7 +49,7 @@ setup(
     ],
     python_requires=">=3.6",
     packages=find_packages(exclude=["tests", "tools", "docs", "contrib"]),
-    entry_points={"console_scripts": ["david=david.__main__:main"]},
+    entry_points={"console_scripts": ["dazu=dazu.__main__:main"]},
     version=__version__,
     install_requires=install_requires,
     extras_requires=extras_requires,
@@ -65,17 +65,17 @@ setup(
     keywords="nlp machine-learning machine-learning-library bot bots "
     "botkit rasa conversational-agents conversational-ai chatbot"
     "chatbot-framework bot-framework watson nlu",
-    url="https://github.com/ralphg6/david",
-    download_url="https://github.com/ralphg6/david/archive/{}.tar.gz"
+    url="https://github.com/ralphg6/dazu",
+    download_url="https://github.com/ralphg6/dazu/archive/{}.tar.gz"
     "".format(__version__),
     project_urls={
-        "Bug Reports": "https://github.com/ralphg6/david/issues",
-        "Source": "https://github.com/ralphg6/david",
+        "Bug Reports": "https://github.com/ralphg6/dazu/issues",
+        "Source": "https://github.com/ralphg6/dazu",
     },
 )
 
-print("\nWelcome to David!")
+print("\nWelcome to Dazu!")
 print(
-    "If you have any questions, please visit our documentation page: https://github.com/ralphg6/david/"
+    "If you have any questions, please visit our documentation page: https://github.com/ralphg6/dazu/"
 )
-print("or join the community discussions on https://github.com/ralphg6/david/issues/")
+print("or join the community discussions on https://github.com/ralphg6/dazu/issues/")

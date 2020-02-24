@@ -1,4 +1,4 @@
-david.adapters package
+dazu.adapters package
 ======================
 
 Subpackages
@@ -6,15 +6,15 @@ Subpackages
 
 .. toctree::
 
-   david.adapters.adapters
+   dazu.adapters.adapters
 
 Submodules
 ----------
 
-david.adapters.adapter module
+dazu.adapters.adapter module
 -----------------------------
 
-.. automodule:: david.adapters.adapter
+.. automodule:: dazu.adapters.adapter
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ david.adapters.adapter module
 Module contents
 ---------------
 
-.. automodule:: david.adapters
+.. automodule:: dazu.adapters
    :members:
    :undoc-members:
    :show-inheritance:

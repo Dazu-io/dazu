@@ -57,7 +57,7 @@
         {
             "condition": "#saudacao",
             "output": {
-                "text": "Olá, eu sou o David!!!!"
+                "text": "Olá, eu sou o Dazu!!!!"
             }
         },
         {

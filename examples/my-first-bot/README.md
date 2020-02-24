@@ -1,5 +1,5 @@
 # My First Bot
-This a simple example of the use of David.  
+This a simple example of the use of Dazu.  
 
 ## How to RUN
 
@@ -9,5 +9,5 @@ docker-compose up --build
 or
 
 ```bash
-python3 ../../david/app.py
+python3 ../../dazu/app.py
 ```

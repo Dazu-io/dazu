@@ -1,4 +1,4 @@
-david.training\_data package
+dazu.training\_data package
 ============================
 
 Subpackages
@@ -6,15 +6,15 @@ Subpackages
 
 .. toctree::
 
-   david.training_data.formats
+   dazu.training_data.formats
 
 Submodules
 ----------
 
-david.training\_data.reader module
+dazu.training\_data.reader module
 ----------------------------------
 
-.. automodule:: david.training_data.reader
+.. automodule:: dazu.training_data.reader
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ david.training\_data.reader module
 Module contents
 ---------------
 
-.. automodule:: david.training_data
+.. automodule:: dazu.training_data
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-david.components.dialogue package
+dazu.components.dialogue package
 =================================
 
 Submodules
 ----------
 
-david.components.dialogue.simple module
+dazu.components.dialogue.simple module
 ---------------------------------------
 
-.. automodule:: david.components.dialogue.simple
+.. automodule:: dazu.components.dialogue.simple
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +16,7 @@ david.components.dialogue.simple module
 Module contents
 ---------------
 
-.. automodule:: david.components.dialogue
+.. automodule:: dazu.components.dialogue
    :members:
    :undoc-members:
    :show-inheritance:

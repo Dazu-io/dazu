@@ -1,7 +1,7 @@
 import pytest
 
-from david.adapters import adapter
-from david.typing import message
+from dazu.adapters import adapter
+from dazu.typing import message
 
 
 def test_name():

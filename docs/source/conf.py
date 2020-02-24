@@ -11,7 +11,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 
-from david import version as david_version
+from dazu import version as dazu_version
 import os
 import sys
 
@@ -20,12 +20,12 @@ sys.path.insert(0, os.path.abspath("../../"))
 
 # -- Project information -----------------------------------------------------
 
-project = "David"
+project = "Dazu"
 copyright = "2020, Raphael Pinto"
 author = "Raphael Pinto"
 
 # The full version, including alpha/beta/rc tags
-release = david_version.__version__
+release = dazu_version.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -58,4 +58,4 @@ html_static_path = ["_static"]
 
 # Added configuration
 master_doc = "index"
-source_suffix = ['.rst', '.md']
+source_suffix = [".rst", ".md"]

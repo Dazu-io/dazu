@@ -12,10 +12,10 @@ COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
 ## Copy rest of code
-COPY david /app
+COPY dazu /app
 
 RUN pip install .
 
-ENTRYPOINT ["david"]
+ENTRYPOINT ["dazu"]
 
 CMD ["run"]
