@@ -65,17 +65,17 @@ setup(
     keywords="nlp machine-learning machine-learning-library bot bots "
     "botkit rasa conversational-agents conversational-ai chatbot"
     "chatbot-framework bot-framework watson nlu",
-    url="https://github.com/ralphg6/dazu",
-    download_url="https://github.com/ralphg6/dazu/archive/{}.tar.gz"
+    url="https://dazu.io",
+    download_url="https://github.com/dazu-io/dazu/archive/{}.tar.gz"
     "".format(__version__),
     project_urls={
-        "Bug Reports": "https://github.com/ralphg6/dazu/issues",
-        "Source": "https://github.com/ralphg6/dazu",
+        "Bug Reports": "https://github.com/dazu-io/dazu/issues",
+        "Source": "https://github.com/dazu-io/dazu",
     },
 )
 
 print("\nWelcome to Dazu!")
 print(
-    "If you have any questions, please visit our documentation page: https://github.com/ralphg6/dazu/"
+    "If you have any questions, please visit our documentation page: https://docs.dazu.io/"
 )
-print("or join the community discussions on https://github.com/ralphg6/dazu/issues/")
+print("or join the community discussions on https://github.com/dazu-io/dazu/issues/")
