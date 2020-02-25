@@ -1,3 +1,5 @@
+![Dazu Chatbot Engine](/images/logo.png)
+
 # Dazu
 
 [![Documentation Status](https://readthedocs.org/projects/david-ausubel/badge/?version=latest)](https://docs.dazu.io/en/latest/?badge=latest)
