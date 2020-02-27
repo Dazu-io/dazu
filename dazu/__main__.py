@@ -1,8 +1,15 @@
 import argparse
 
+import grpc
+
 import dazu.config
 from dazu import version
 from dazu.cli import run, train
+
+import dazu.components.proto.component_pb2 as component__pb2
+import dazu.components.proto.component_pb2_grpc as component_pb2_grpc
+
+from google.protobuf.struct_pb2 import Struct
 
 
 def create_argument_parser() -> argparse.ArgumentParser:
@@ -34,7 +41,13 @@ def print_version() -> None:
 
 
 def main() -> None:
-    # run(config)
+    channel = grpc.insecure_channel("localhost:9898")
+    stub = component_pb2_grpc.ComponentServiceStub(channel)
+
+    s = Struct()
+    s.update({"text": "value"})
+    response = stub.Process(component__pb2.DazuMessage(input=s))
+    print("Greeter client received: " + response.output["text"][0])
 
     arg_parser = create_argument_parser()
     cmdline_arguments = arg_parser.parse_args()
